@@ -2,12 +2,11 @@
 
 echo "Installing apt packages"
 sudo apt-get -y update
-sudo apt-get -y install bison byacc curl git vim \
-	mosh keychain neofetch zsh ncurses-bin gdebi-core apt-file \
-	unzip sysstat net-tools dnsutils \
-	universal-ctags software-properties-common \
-	bc dh-autoreconf libcurl4-gnutls-dev libexpat1-dev \
-	gawk gettext libz-dev libssl-dev install-info || exit
+sudo apt-get -y install curl git vim mosh keychain zsh ncurses-bin apt-file \
+	unzip sysstat net-tools dnsutils bc gawk universal-ctags \
+	software-properties-common || exit
+# dh-autoreconf libcurl4-gnutls-dev libexpat1-dev \
+# gettext bison byacc gdebi-core libz-dev libssl-dev install-info || exit
 
 [[ -x "/usr/bin/uname" ]] && UNAME="/usr/bin/uname"
 [[ -x "/bin/uname" ]] && UNAME="/bin/uname"
