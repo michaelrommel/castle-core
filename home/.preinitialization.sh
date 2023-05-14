@@ -4,18 +4,41 @@ export DEBUG=false
 
 echo -n "Initializing"
 
-# Go location
-GOPATH=$(readlink -f "${HOME}/software")/go
-export GOPATH
+MYSH=$(readlink /proc/$$/exe)
+if [[ $MYSH =~ "zsh" ]]; then
+	is_zsh=1
+else
+	is_zsh=0
+fi
 
-export PATH="${HOME}/bin:${HOME}/.cargo/bin:${GOPATH}/bin:${HOME}/.local/bin:\
-/usr/local/bin:/usr/local/opt/avr-gcc@8/bin:/usr/local/opt/arm-gcc-bin@8/bin:\
-${PATH}"
-
-# pyenv installation on macos
-# if command -v pyenv 1>/dev/null 2>&1; then
-#   eval "$(pyenv init -)"
-# fi
+if [[ -d "${HOME}/.path.d" ]]; then
+	for p in "${HOME}/.path.d"/*sh; do
+		ext=${p##*.}
+		program=$(basename "$p" "$ext")
+		echo -n " • ${program}"
+		case $ext in
+		"zsh")
+			if [[ $is_zsh -eq 1 ]]; then
+				echo "sourcing zsh version of ${p}"
+				# shellcheck disable=1090
+				source "${p}"
+			fi
+			;;
+		"bash")
+			if [[ $is_zsh -eq 0 ]]; then
+				echo "sourcing bash version of ${p}"
+				# shellcheck disable=1090
+				source "${p}"
+			fi
+			;;
+		*)
+			echo "sourcing sh version of ${p}"
+			# shellcheck disable=1090
+			source "${p}"
+			;;
+		esac
+	done
+fi
 
 GPG_TTY=$(tty)
 export GPG_TTY
@@ -35,8 +58,7 @@ if [[ "${OSNAME}" != "Darwin" ]]; then
 	export LC_COLLATE="C.UTF-8"
 fi
 
-#
-# load authenticattion tokens
+# load authentication tokens
 # shellcheck source=/home/rommel/.gh_credentials.sh
 [[ -s "${HOME}/.gh_credentials.sh" ]] && source "${HOME}/.gh_credentials.sh"
 
@@ -64,24 +86,6 @@ export MANPAGER='less -r -s -M +Gg'
 [[ -f "$HOME/.less_colors.sh" ]] && source "$HOME/.less_colors".sh
 # shellcheck source=./.dir_colors.sh
 [[ -f "$HOME/.dir_colors.sh" ]] && source "$HOME/.dir_colors.sh"
-
-echo -n " • fnm"
-# shellcheck source=./.fnm.sh
-[[ -s "$HOME/.fnm.sh" ]] && source "$HOME/.fnm.sh" # This loads fnm
-
-if [ "$(basename "${SHELL}")" = "bash" ]; then
-	echo -n " • fzf"
-	[[ ${DEBUG} == true ]] && echo -n " (bash)"
-	# shellcheck source=./.fzf.bash
-	[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-fi
-
-echo -n " • homesick"
-# shellcheck source=./.homesick/repos/homesick/homesick.sh
-if [[ -f "${HOME}/.homesick/repos/homesick/homesick.sh" ]]; then
-	source "${HOME}/.homesick/repos/homesick/homesick.sh"
-	fpath=(${HOME}/.homesick/repos/homesick/completions $fpath)
-fi
 
 echo -n " • mosh"
 FATHER=$(ps -p $PPID -o comm=)
