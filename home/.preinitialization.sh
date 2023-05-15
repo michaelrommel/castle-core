@@ -7,8 +7,8 @@ source "${HOME}/.minimalrc"
 GPG_TTY=$(tty)
 export GPG_TTY
 export EDITOR=vim
+export VISUAL=vim
 export MOSH_ESCAPE_KEY='~'
-export BAT_THEME=gruvbox-dark
 
 [[ -x "/usr/bin/uname" ]] && UNAME="/usr/bin/uname"
 [[ -x "/bin/uname" ]] && UNAME="/bin/uname"
