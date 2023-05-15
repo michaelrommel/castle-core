@@ -2,43 +2,7 @@
 
 export DEBUG=false
 
-echo -n "Initializing"
-
-MYSH=$(readlink /proc/$$/exe)
-if [[ $MYSH =~ "zsh" ]]; then
-	is_zsh=1
-else
-	is_zsh=0
-fi
-
-if [[ -d "${HOME}/.path.d" ]]; then
-	for p in "${HOME}/.path.d"/*sh; do
-		ext=${p##*.}
-		program=$(basename "$p" "$ext")
-		echo -n " • ${program}"
-		case $ext in
-		"zsh")
-			if [[ $is_zsh -eq 1 ]]; then
-				echo "sourcing zsh version of ${p}"
-				# shellcheck disable=1090
-				source "${p}"
-			fi
-			;;
-		"bash")
-			if [[ $is_zsh -eq 0 ]]; then
-				echo "sourcing bash version of ${p}"
-				# shellcheck disable=1090
-				source "${p}"
-			fi
-			;;
-		*)
-			echo "sourcing sh version of ${p}"
-			# shellcheck disable=1090
-			source "${p}"
-			;;
-		esac
-	done
-fi
+source "${HOME}/.minimalrc"
 
 GPG_TTY=$(tty)
 export GPG_TTY
