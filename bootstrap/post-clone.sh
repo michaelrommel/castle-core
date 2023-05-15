@@ -37,17 +37,7 @@ if [[ "${OSRELEASE}" =~ "-microsoft-" ]]; then
 		go get -d github.com/jstarks/npiperelay
 		GOOS=windows go build -o ${NPR} github.com/jstarks/npiperelay
 	fi
-	# on WSL2 install a shell script with npiperelay as ssh-agent
-	cd "${HOME}/bin" || exit
-	ln -sf wsl2-relay-agent.sh ssh-agent
 fi
-
-echo "Creating current terminfo files"
-cd "${HOME}" || exit
-#sudo /usr/bin/tic -xe mintty,tmux-256color "${HOME}/.dotfiles/terminfo/terminfo.src"
-sudo /usr/bin/tic -x "${HOME}/.dotfiles/terminfo/mintty.terminfo"
-sudo /usr/bin/tic -x "${HOME}/.dotfiles/terminfo/tmux.terminfo"
-sudo /usr/bin/tic -x "${HOME}/.dotfiles/terminfo/xterm-kitty.terminfo"
 
 GIT_VERSION=$(git --version | sed -e 's/git version \([0-9]*\.[0-9]*\)\..*/\1/')
 if (($(echo "${GIT_VERSION} < 2.26" | bc -l))); then
