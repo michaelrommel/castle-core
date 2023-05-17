@@ -27,11 +27,11 @@ fi
 [[ -s "${HOME}/.gh_credentials.sh" ]] && source "${HOME}/.gh_credentials.sh"
 
 # check for mintty to override TERM variable
-TERMINAL=$("${HOME}/bin/terminal.sh" -n)
-[[ "${TERMINAL}" == "mintty" ]] && export TERM=mintty
-[[ "${TERMINAL}" == "kitty" ]] && export TERM=kitty
-[[ "${TERMINAL}" == "linux" ]] && "${HOME}/bin/set_gruvbox_colors.sh"
-unset TERMINAL
+# TERMINAL=$("${HOME}/bin/terminal.sh" -n)
+# [[ "${TERMINAL}" == "mintty" ]] && export TERM=mintty
+# [[ "${TERMINAL}" == "kitty" ]] && export TERM=kitty
+# [[ "${TERMINAL}" == "linux" ]] && "${HOME}/bin/set_gruvbox_colors.sh"
+# unset TERMINAL
 
 # adjust gruvbos colors
 if [[ "${OSNAME}" == "Darwin" ]]; then
