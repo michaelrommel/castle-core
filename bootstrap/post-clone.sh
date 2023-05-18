@@ -14,7 +14,7 @@ sudo apt-get -y install curl git vim mosh keychain zsh ncurses-bin apt-file \
 OSRELEASE=$("${UNAME}" -r)
 if [[ "${OSRELEASE}" =~ "-microsoft-" ]]; then
 	# on WSL2 install golang to be able to compile npiperelay
-	sudo apt-get -y install golang socat
+	sudo apt-get -y install socat
 fi
 
 echo "Installing zsh with theme p10k / bash fallback aliases"
