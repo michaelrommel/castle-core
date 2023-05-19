@@ -7,6 +7,8 @@ if is_mac; then
 	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick)
 	missing=()
 	check_brewed "missing" "${desired[@]}"
+	echo "(brew) installing ${missing[*]}"
+	brew install "${missing[@]}"
 	for p in "${missing[@]}"; do
 		echo "(brew) installing $p"
 	done
@@ -17,9 +19,8 @@ else
 		software-properties-common socat)
 	missing=()
 	check_dpkged "missing" "${desired[@]}"
-	for p in "${missing[@]}"; do
-		echo "(apt) installing $p"
-	done
+	echo "(apt) installing ${missing[*]}"
+	sudo apt-get -y install "${missing[@]}"
 fi
 
 echo "Installing zsh with theme p10k / bash fallback aliases"
