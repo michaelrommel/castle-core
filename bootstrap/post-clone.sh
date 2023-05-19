@@ -7,30 +7,33 @@ if is_mac; then
 	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick)
 	missing=()
 	check_brewed "missing" "${desired[@]}"
-	echo "(brew) installing ${missing[*]}"
-	brew install "${missing[@]}"
-	for p in "${missing[@]}"; do
-		echo "(brew) installing $p"
-	done
+	if [[ "${#missing[@]}" -gt 0 ]]; then
+		echo "(brew) installing ${missing[*]}"
+		brew install "${missing[@]}"
+	fi
 else
-	sudo apt-get -y update
 	desired=(curl git vim mosh keychain zsh ncurses-bin apt-file
 		unzip sysstat net-tools dnsutils bc gawk universal-ctags
 		software-properties-common socat)
 	missing=()
 	check_dpkged "missing" "${desired[@]}"
-	echo "(apt) installing ${missing[*]}"
-	sudo apt-get -y install "${missing[@]}"
+	if [[ "${#missing[@]}" -gt 0 ]]; then
+		echo "(apt) installing ${missing[*]}"
+		sudo apt-get -y update
+		sudo apt-get -y install "${missing[@]}"
+	fi
 fi
 
-echo "Installing zsh with theme p10k / bash fallback aliases"
-cd "${HOME}" || exit
-sh -c "$(curl -fsSL \
-	https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) \
-  --unattended"
-echo "Installing powerlevel10k for zsh"
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-	"${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+if [[ -z "${ZSH}" && ! -d "${HOME}/.oh-my-zsh" ]]; then
+	echo "Installing zsh with theme p10k / bash fallback aliases"
+	cd "${HOME}" || exit
+	sh -c "$(curl -fsSL \
+		https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) \
+	  --unattended"
+	echo "Installing powerlevel10k for zsh"
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+		"${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+fi
 
 cd "${HOME}" || exit
 touch .hushlogin
@@ -46,7 +49,8 @@ if is_wsl; then
 fi
 
 GIT_VERSION=$(git --version | sed -e 's/git version \([0-9]*\.[0-9]*\)\..*/\1/')
-if (($(echo "${GIT_VERSION} < 2.26" | bc -l))); then
+#if (($(echo "${GIT_VERSION} < 2.26" | bc -l))); then
+if ! satisfied "2.26" "${GIT_VERSION}"; then
 	if ! is_mac; then
 		source /etc/os-release
 		if [[ ${VERSION_CODENAME} == "buster" ]]; then
