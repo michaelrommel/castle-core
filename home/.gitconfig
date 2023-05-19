@@ -44,5 +44,3 @@
         autosetuprebase = always
 [init]
         templatedir = ~/.git_template
-[gitflow "branch"]
-        master = main
