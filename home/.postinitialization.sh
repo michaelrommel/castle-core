@@ -16,6 +16,12 @@ alias v='vim'
 unalias 'l'
 alias l='gls --color -lah --hyperlink=auto'
 
+lb() {
+	ls -lah --color=always $* | bat
+}
+
+export lb
+
 logtail() {
 	tail -f "$@" | bat --paging=never -l log
 }
