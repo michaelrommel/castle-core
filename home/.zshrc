@@ -117,9 +117,6 @@ source $ZSH/oh-my-zsh.sh
 
 # post oh-my-zsh user specific initialization
 
-# check if docker is installed
-[[ -f "${HOME}/.docker/init-zsh.sh" ]] && source "${HOME}/.docker/init-zsh.sh"
-
 # my personal initialization script 2nd part
 [[ -f "${HOME}/.postinitialization.sh" ]] && source "${HOME}/.postinitialization.sh"
 
