@@ -116,13 +116,13 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # post oh-my-zsh user specific initialization
+
+# check if docker is installed
+[[ -f "${HOME}/.docker/init-zsh.sh" ]] && source "${HOME}/.docker/init-zsh.sh"
+
+# my personal initialization script 2nd part
 [[ -f "${HOME}/.postinitialization.sh" ]] && source "${HOME}/.postinitialization.sh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f "${HOME}/.p10k.zsh" ]] || source "${HOME}/.p10k.zsh"
 
-# initialize fzf key bindings - must be after oh-my-zsh initialization
-[[ -f "${HOME}/.fzf.zsh" ]] && source "${HOME}/.fzf.zsh"
-
-# check if docker is installed
-[[ -f "${HOME}/.docker/init-zsh.sh" ]] && source "${HOME}/.docker/init-zsh.sh"
