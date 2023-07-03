@@ -1,0 +1,222 @@
+{
+	"$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+	"version": 2,
+	"final_space": true,
+	"console_title_template": "{{ .Shell }} in {{ .Folder }}",
+	"blocks": [
+		{
+			"type": "prompt",
+			"alignment": "left",
+			"segments": [
+				{
+					"type": "session",
+					"style": "diamond",
+					"foreground": "p:light4",
+					"background": "p:dark2",
+					"leading_diamond": "\ue0b6",
+					"trailing_diamond": "\ue0b0",
+					"template": "{{ if .SSHSession }}\ueb01 {{ .UserName }}@{{ .HostName }}{{else}}\uf015 {{ end }}"
+				},
+				{
+					"type": "path",
+					"style": "powerline",
+					"powerline_symbol": "\ue0b0",
+					"foreground": "p:light4",
+					"background": "p:dark2",
+					"template": " \uea83 {{ path .Path .Location }} ",
+					"properties": {
+						"style": "unique"
+					}
+				},
+				{
+					"type": "git",
+					"style": "powerline",
+					"powerline_symbol": "\ue0b0",
+					"foreground": "p:dark2",
+					"foreground_templates": [
+						"{{ if or (.Working.Changed) (.Staging.Changed) }}p:dark2{{ end }}",
+						"{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:dark2{{ end }}",
+						"{{ if gt .Ahead 0 }}p:dark2{{ end }}"
+					],
+					"background": "p:light3",
+					"background_templates": [
+						"{{ if or (.Working.Changed) (.Staging.Changed) }}p:neutral_yellow{{ end }}",
+						"{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:neutral_red{{ end }}",
+						"{{ if gt .Ahead 0 }}p:neutral_blue{{ end }}",
+						"{{ if gt .Behind 0 }}p:neutral_aqua{{ end }}"
+					],
+					"template": "{{ if .UpstreamURL }} {{ url .UpstreamIcon .UpstreamURL }}{{ end }} {{ .HEAD }}{{if .BranchStatus }} {{ .BranchStatus }}{{ end }}{{ if .Working.Changed }} \uf044  {{ .Working.String }}{{ end }}{{ if .Staging.Changed }} \uf046 {{ .Staging.String }}{{ end }}{{ if gt .StashCount 0 }} *{{ .StashCount }}{{ end }} ",
+					"properties": {
+						"branch_max_length": 25,
+						"fetch_status": true,
+						"fetch_upstream_icon": true,
+						"branch_identical_icon": "",
+						"branch_gone_icon": ""
+					}
+				},
+				{
+					"type": "root",
+					"style": "powerline",
+					"powerline_symbol": "\ue0b0",
+					"foreground": "p:bright_red",
+					"background": "p:neutral_yellow",
+					"template": " \uf0e7 "
+				},
+				{
+					"type": "exit",
+					"style": "diamond",
+					"foreground": "p:light4",
+					"background": "p:faded_green",
+					"background_templates": ["{{ if gt .Code 0 }}p:neutral_red{{ end }}"],
+					"leading_diamond": "<transparent,background>\ue0b0</>",
+					"trailing_diamond": "\ue0b4",
+					"template": " {{ if gt .Code 0 }}\uf00d{{ else }}\uf00c{{ end }} ",
+					"properties": {
+						"always_enabled": true
+					}
+				}
+			]
+		},
+		{
+			"type": "rprompt",
+			"segments": [
+				{
+					"type": "node",
+					"style": "plain",
+					"foreground": "p:neutral_green",
+					"background": "transparent",
+					"template": "\ue718 {{.Full}} ",
+					"properties": {
+						"display_mode": "files",
+						"fetch_package_manager": false,
+						"home_enabled": false
+					}
+				},
+				{
+					"type": "go",
+					"style": "plain",
+					"foreground": "p:neutral_blue",
+					"background": "transparent",
+					"template": "\ue724 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }} ",
+					"properties": {
+						"display_mode": "files",
+						"fetch_version": true
+					}
+				},
+				{
+					"type": "python",
+					"style": "plain",
+					"foreground": "p:bright_blue",
+					"background": "transparent",
+					"template": "\ue73c {{ if .Error }}{{ .Error }} {{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }} {{ end }}",
+					"properties": {
+						"display_mode": "files",
+						"fetch_version": true,
+						"fetch_virtual_env": true
+					}
+				},
+				{
+					"type": "rust",
+					"style": "powerline",
+					"foreground": "p:neutral_yellow",
+					"background": "transparent",
+					"template": " \ue7a8 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }} {{ end }}",
+					"properties": {
+						"display_mode": "files",
+						"fetch_version": true
+					}
+				},
+				{
+					"type": "shell",
+					"style": "plain",
+					"foreground": "p:dark4",
+					"background": "transparent",
+					"template": "in <p:light3><b>{{ .Name }}</b></> "
+				},
+				{
+					"type": "time",
+					"style": "plain",
+					"foreground": "p:dark4",
+					"background": "transparent",
+					"template": "at <p:light3><b>{{ .CurrentDate | date \"15:04:05\" }}</b></>"
+				}
+			]
+		}
+	],
+	"tooltips": [
+		{
+			"type": "aws",
+			"tips": ["aws"],
+			"style": "diamond",
+			"foreground": "p:light4",
+			"background": "p:neutral_orange",
+			"leading_diamond": "\ue0b0",
+			"trailing_diamond": "\ue0b4",
+			"template": " \ue7ad {{ .Profile }}{{ if .Region }}@{{ .Region }}{{ end }} ",
+			"properties": {
+				"display_default": true
+			}
+		},
+		{
+			"type": "az",
+			"tips": ["az"],
+			"style": "diamond",
+			"foreground": "p:light4",
+			"background": "p:neutral_blue",
+			"leading_diamond": "\ue0b0",
+			"trailing_diamond": "\ue0b4",
+			"template": " \ufd03 {{ .Name }} ",
+			"properties": {
+				"display_default": true
+			}
+		}
+	],
+	"transient_prompt": {
+		"foreground": "p:light4",
+		"background": "transparent",
+		"template": "<p:dark2,transparent>\ue0b6</><,p:dark2>{{ .Folder }} </><p:dark2,transparent>\ue0b0</> "
+	},
+	"secondary_prompt": {
+		"foreground": "p:light4",
+		"background": "transparent",
+		"template": "<p:dark2,transparent>\ue0b6</><,p:dark2>></><p:dark2,transparent>\ue0b0</> "
+	},
+	"palette": {
+		"dark0_hard": "#1d2021",
+		"dark0": "#282828",
+		"dark0_soft": "#32302f",
+		"dark1": "#3c3836",
+		"dark2": "#504945",
+		"dark3": "#665c54",
+		"dark4": "#7c6f64",
+		"light0_hard": "#f9f5d7",
+		"light0": "#fbf1c7",
+		"light0_soft": "#f2e5bc",
+		"light1": "#ebdbb2",
+		"light2": "#d5c4a1",
+		"light3": "#bdae93",
+		"light4": "#a89984",
+		"bright_red": "#fb4934",
+		"bright_green": "#b8bb26",
+		"bright_yellow": "#fabd2f",
+		"bright_blue": "#83a598",
+		"bright_purple": "#d3869b",
+		"bright_aqua": "#8ec07c",
+		"bright_orange": "#fe8019",
+		"neutral_red": "#cc241d",
+		"neutral_green": "#98971a",
+		"neutral_yellow": "#d79921",
+		"neutral_blue": "#458588",
+		"neutral_purple": "#b16286",
+		"neutral_aqua": "#689d6a",
+		"neutral_orange": "#d65d0e",
+		"faded_red": "#9d0006",
+		"faded_green": "#79740e",
+		"faded_yellow": "#b57614",
+		"faded_blue": "#076678",
+		"faded_purple": "#8f3f71",
+		"faded_aqua": "#427b58",
+		"faded_orange": "#af3a03",
+		"gray": "#928374"
+	}
+}

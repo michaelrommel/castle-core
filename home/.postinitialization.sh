@@ -13,7 +13,9 @@ alias bgr="${HOME}/.bat/src/batgrep.sh"
 alias gll='git log --graph --pretty=oneline --abbrev-commit'
 alias v='vim'
 
-unalias 'l'
+if type l 2>/dev/null 1>&2; then
+	unalias 'l'
+fi
 alias l='gls --color -lah --hyperlink=auto'
 
 lb() {

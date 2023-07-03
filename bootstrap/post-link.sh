@@ -12,9 +12,11 @@ fi
 echo "Creating current terminfo files"
 cd "${HOME}" || exit
 /usr/bin/tic -x "${HOME}/.terminfo_src/tmux.terminfo"
-if is_wsl; then
-	/usr/bin/tic -x "${HOME}/.terminfo_src/mintty.terminfo"
-fi
+/usr/bin/tic -x "${HOME}/.terminfo_src/mintty.terminfo"
 if is_mac; then
-	/usr/bin/tic -x "${HOME}/.terminfo_src/xterm-kitty.terminfo"
+	if ! infocmp xterm-kitty 2>/dev/null 1>&2; then
+		sudo /usr/bin/tic -x "${HOME}/.terminfo_src/xterm-kitty.terminfo" 2>/dev/null
+	fi
+else
+	/usr/bin/tic -x "${HOME}/.terminfo_src/xterm-kitty.terminfo" 2>/dev/null
 fi
