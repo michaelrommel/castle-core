@@ -4,7 +4,7 @@ source "${HOME}/.homesick/helper.sh"
 
 echo "Installing basic packages"
 if is_mac; then
-	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick)
+	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick oh-my-posh)
 	missing=()
 	check_brewed "missing" "${desired[@]}"
 	if [[ "${#missing[@]}" -gt 0 ]]; then
@@ -30,9 +30,10 @@ if [[ -z "${ZSH}" && ! -d "${HOME}/.oh-my-zsh" ]]; then
 	sh -c "$(curl -fsSL \
 		https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) \
 	  --unattended"
-	echo "Installing powerlevel10k for zsh"
-	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
-		"${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+	if ! is_mac; then
+		echo "Installing oh-my-posh for zsh"
+		curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "${HOME}/.oh-my-posh"
+	fi
 fi
 
 cd "${HOME}" || exit
