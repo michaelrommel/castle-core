@@ -30,10 +30,11 @@ if [[ -z "${ZSH}" && ! -d "${HOME}/.oh-my-zsh" ]]; then
 	sh -c "$(curl -fsSL \
 		https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) \
 	  --unattended"
-	if ! is_mac; then
-		echo "Installing oh-my-posh for zsh"
-		curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "${HOME}/.oh-my-posh"
-	fi
+fi
+
+if ! is_mac && [[ ! -d "${HOME}/.oh-my-posh" ]]; then
+	echo "Installing oh-my-posh for zsh"
+	curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "${HOME}/.oh-my-posh"
 fi
 
 cd "${HOME}" || exit
