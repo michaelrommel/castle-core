@@ -34,6 +34,7 @@ fi
 
 if ! is_mac && [[ ! -d "${HOME}/.oh-my-posh" ]]; then
 	echo "Installing oh-my-posh for zsh"
+	mkdir -p "${HOME}/.oh-my-posh"
 	curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "${HOME}/.oh-my-posh"
 fi
 
@@ -83,5 +84,8 @@ ln -sf .dotfiles/.gitconfig .
 
 cd "${HOME}" || exit
 if ! is_mac; then
-	sudo chsh -s /usr/bin/zsh "$(whoami)"
+	MYSH=$(ps -o comm= $$)
+	if [[ ! $MYSH =~ "zsh" ]]; then
+		sudo chsh -s /usr/bin/zsh "$(whoami)"
+	fi
 fi
