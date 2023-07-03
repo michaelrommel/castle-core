@@ -35,6 +35,7 @@ fi
 if ! is_mac && [[ ! -d "${HOME}/.oh-my-posh" ]]; then
 	echo "Installing oh-my-posh for zsh"
 	mkdir -p "${HOME}/.oh-my-posh"
+	export PATH="${HOME}/.oh-my-posh:${PATH}"
 	curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "${HOME}/.oh-my-posh"
 fi
 
