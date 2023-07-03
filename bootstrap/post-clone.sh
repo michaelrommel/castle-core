@@ -85,8 +85,8 @@ ln -sf .dotfiles/.gitconfig .
 
 cd "${HOME}" || exit
 if ! is_mac; then
-	MYSH=$(ps -o comm= $$)
+	MYSH=$(getent passwd "${LOGNAME}" | cut -d: -f7)
 	if [[ ! $MYSH =~ "zsh" ]]; then
-		sudo chsh -s /usr/bin/zsh "$(whoami)"
+		sudo chsh -s /usr/bin/zsh "${LOGNAME}"
 	fi
 fi
