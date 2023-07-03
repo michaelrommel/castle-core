@@ -113,5 +113,5 @@ source $ZSH/oh-my-zsh.sh
 [[ -f "${HOME}/.postinitialization.sh" ]] && source "${HOME}/.postinitialization.sh"
 
 # prompt customization
-[[ -f "${HOME}/.posh.json" ]] && eval "$(oh-my-posh init zsh --config ${HOME}/posh.json)"
+[[ -f "${HOME}/.posh.json" ]] && eval "$(oh-my-posh init zsh --config ${HOME}/.posh.json)"
 
