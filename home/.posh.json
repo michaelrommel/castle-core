@@ -35,8 +35,8 @@
 					"foreground": "p:dark2",
 					"foreground_templates": [
 						"{{ if or (.Working.Changed) (.Staging.Changed) }}p:dark2{{ end }}",
-						"{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:dark2{{ end }}",
-						"{{ if gt .Ahead 0 }}p:dark2{{ end }}"
+						"{{ if and (gt .Ahead 0) (gt .Behind 0) }}p:dark0{{ end }}",
+						"{{ if gt .Ahead 0 }}p:dark0{{ end }}"
 					],
 					"background": "p:light3",
 					"background_templates": [
