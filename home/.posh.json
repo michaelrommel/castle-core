@@ -25,7 +25,8 @@
 					"background": "p:dark2",
 					"template": " \uea83 {{ path .Path .Location }} ",
 					"properties": {
-						"style": "unique"
+						"max_depth": 4,
+						"style": "agnoster_short"
 					}
 				},
 				{

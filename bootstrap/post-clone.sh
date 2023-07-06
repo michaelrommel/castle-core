@@ -24,14 +24,6 @@ else
 	fi
 fi
 
-if [[ -z "${ZSH}" && ! -d "${HOME}/.oh-my-zsh" ]]; then
-	echo "Installing zsh with theme p10k / bash fallback aliases"
-	cd "${HOME}" || exit
-	sh -c "$(curl -fsSL \
-		https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh) \
-	  --unattended"
-fi
-
 if ! is_mac && [[ ! -d "${HOME}/.oh-my-posh" ]]; then
 	echo "Installing oh-my-posh for zsh"
 	mkdir -p "${HOME}/.oh-my-posh"

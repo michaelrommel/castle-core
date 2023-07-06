@@ -50,6 +50,9 @@ export MANPAGER='less -r -s -M +Gg'
 [[ -f "$HOME/.less_colors.sh" ]] && source "$HOME/.less_colors".sh
 # shellcheck source=./.dir_colors.sh
 [[ -f "$HOME/.dir_colors.sh" ]] && source "$HOME/.dir_colors.sh"
+# take over oh-my-zsh ls colors
+# shellcheck source=./.ls_colors.sh
+[[ -f "${HOME}/.ls_colors.zsh" ]] && source "${HOME}/.ls_colors.sh"
 
 echo -n " • mosh"
 FATHER=$(ps -p $PPID -o comm=)
