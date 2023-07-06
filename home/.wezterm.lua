@@ -75,6 +75,18 @@ config.font_rules = {
 config.font_size = fontsize
 config.line_height = 1.00
 config.bold_brightens_ansi_colors = "No"
+config.audible_bell = "Disabled"
+config.visual_bell = {
+	fade_in_function = 'Linear',
+	fade_in_duration_ms = 20,
+	fade_out_function = 'Linear',
+	fade_out_duration_ms = 20,
+	-- target = "CursorColor",
+}
+config.colors = {
+	visual_bell = '#202324',
+}
+
 config.treat_east_asian_ambiguous_width_as_wide = false
 config.unicode_version = 9
 -- config.normalize_output_to_unicode_nfc = true
@@ -85,6 +97,7 @@ config.allow_square_glyphs_to_overflow_width = "Never"
 config.custom_block_glyphs = true
 config.freetype_load_target = "Light"
 config.freetype_render_target = "Light"
+-- see: https://github.com/dawikur/base16-gruvbox-scheme
 config.color_scheme = 'Gruvbox dark, hard (base16)'
 config.window_padding = {
 	left = 0,
