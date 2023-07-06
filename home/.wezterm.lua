@@ -1,20 +1,30 @@
 local wezterm = require 'wezterm'
 local config = {}
 
-config.default_domain = 'WSL:bullseye'
+local fontname = 'VictorMono Nerd Font'
+local fontsize = 17
+local in_wsl = os.getenv('WSL_DISTRO_NAME') ~= nil
+
+if in_wsl then
+	fontname = 'VictorMono NF'
+	fontsize = 13
+	config.default_domain = 'WSL:bullseye'
+	config.initial_rows = 24
+	config.initial_cols = 80
+else
+	config.initial_rows = 50
+	config.initial_cols = 150
+end
+
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
--- config.initial_rows = 50
--- config.initial_cols = 150
-config.initial_rows = 24
-config.initial_cols = 80
 config.use_fancy_tab_bar = true
-config.font = wezterm.font('VictorMono NF')
+config.font = wezterm.font(fontname)
 config.font_rules = {
 	{
 		intensity = 'Normal',
 		italic = false,
 		font = wezterm.font {
-			family = 'VictorMono NF',
+			family = fontname,
 			weight = 'Regular',
 		},
 	},
@@ -22,7 +32,7 @@ config.font_rules = {
 		intensity = 'Bold',
 		italic = false,
 		font = wezterm.font {
-			family = 'VictorMono NF',
+			family = fontname,
 			weight = 'Regular',
 		},
 	},
@@ -30,7 +40,7 @@ config.font_rules = {
 		intensity = 'Half',
 		italic = false,
 		font = wezterm.font {
-			family = 'VictorMono NF',
+			family = fontname,
 			weight = 'Regular',
 		},
 	},
@@ -38,7 +48,7 @@ config.font_rules = {
 		intensity = 'Normal',
 		italic = true,
 		font = wezterm.font {
-			family = 'VictorMono NF',
+			family = fontname,
 			weight = 'Light',
 			style = 'Italic',
 		},
@@ -47,7 +57,7 @@ config.font_rules = {
 		intensity = 'Bold',
 		italic = true,
 		font = wezterm.font {
-			family = 'VictorMono NF',
+			family = fontname,
 			weight = 'Medium',
 			style = 'Italic',
 		},
@@ -56,13 +66,13 @@ config.font_rules = {
 		intensity = 'Half',
 		italic = true,
 		font = wezterm.font {
-			family = 'VictorMono NF',
+			family = fontname,
 			weight = 'Light',
 			style = 'Italic',
 		},
 	},
 }
-config.font_size = 13
+config.font_size = fontsize
 config.line_height = 1.00
 config.bold_brightens_ansi_colors = "No"
 config.treat_east_asian_ambiguous_width_as_wide = false

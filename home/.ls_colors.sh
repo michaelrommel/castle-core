@@ -2,17 +2,17 @@
 #export LSCOLORS="Gxfxcxdxbxegedabagacad"
 
 # Default coloring for GNU-based ls
-if [[ -z "$LS_COLORS" ]]; then
-  # Define LS_COLORS via dircolors if available. Otherwise, set a default
-  # equivalent to LSCOLORS (generated via https://geoff.greer.fm/lscolors)
-  if (( $+commands[dircolors] )); then
-    [[ -f "$HOME/.dircolors" ]] \
-      && source <(dircolors -b "$HOME/.dircolors") \
-      || source <(dircolors -b)
-  else
-    export LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
-  fi
-fi
+# if [[ -z "$LS_COLORS" ]]; then
+#   # Define LS_COLORS via dircolors if available. Otherwise, set a default
+#   # equivalent to LSCOLORS (generated via https://geoff.greer.fm/lscolors)
+#   if (( $+commands[dircolors] )); then
+#     [[ -f "$HOME/.dircolors" ]] \
+#       && source <(dircolors -b "$HOME/.dircolors") \
+#       || source <(dircolors -b)
+#   else
+#     export LS_COLORS="di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43"
+#   fi
+# fi
 
 function test-ls-args {
   local cmd="$1"          # ls, gls, colorls, ...
@@ -38,11 +38,8 @@ case "$OSTYPE" in
   (darwin|freebsd)*)
     # This alias works by default just using $LSCOLORS
     test-ls-args ls -G && alias ls='ls -G'
-    # Only use GNU ls if installed and there are user defaults for $LS_COLORS,
-    # as the default coloring scheme is not very pretty
-    zstyle -t ':omz:lib:theme-and-appearance' gnu-ls \
-      && test-ls-args gls --color \
-      && alias ls='gls --color=tty'
+	# test for gnu ls
+    test-ls-args gls --color && alias ls='gls --color=tty'
     ;;
   *)
     if test-ls-args ls --color; then
@@ -54,4 +51,3 @@ case "$OSTYPE" in
 esac
 
 unfunction test-ls-args
-
