@@ -70,11 +70,6 @@ if ! satisfied "2.26" "${GIT_VERSION}"; then
 	fi
 fi
 
-echo "Configuring git"
-cd "${HOME}" || exit
-ln -sf .dotfiles/.git_template .
-ln -sf .dotfiles/.gitconfig .
-
 cd "${HOME}" || exit
 if ! is_mac; then
 	MYSH=$(getent passwd "${LOGNAME}" | cut -d: -f7)
