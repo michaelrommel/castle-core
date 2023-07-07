@@ -20,5 +20,5 @@ autoload -Uz compinit && compinit
 [[ -f "${HOME}/.postinitialization.sh" ]] && source "${HOME}/.postinitialization.sh"
 
 # prompt customization
-[[ -f "${HOME}/.posh.json" ]] && eval "$(oh-my-posh init zsh --config ${HOME}/.posh.json)"
+[[ -f "${HOME}/.oh-my-posh/posh.json" ]] && eval "$(oh-my-posh init zsh --config ${HOME}/.oh-my-posh/posh.json)"
 
