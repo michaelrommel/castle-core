@@ -46,3 +46,6 @@
         templatedir = ~/.git_template
 [pull]
 	rebase = false
+[user]
+	name = Michael Rommel
+	email = rommel@layer-7.net
