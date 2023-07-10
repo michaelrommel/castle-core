@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 local config = {}
 
-local fontname = 'VictorMono Nerd Font'
+local fontname = 'VictorMono NF'
 local fontsize = 17
 local in_wsl = os.getenv('WSL_DISTRO_NAME') ~= nil
 

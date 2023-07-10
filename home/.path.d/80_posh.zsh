@@ -1,7 +1,7 @@
 #! /usr/bin/zsh
 
 ARCH=$(uname -m)
-OS=$(uname -o)
+OS=$(uname)
 
 if [[ ! "${OS}" == "Darwin" ]]; then
 	if [[ -d "${HOME}/.oh-my-posh" && ! ":${PATH}:" == *:${HOME}/.oh-my-posh:* ]]; then
