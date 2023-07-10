@@ -44,4 +44,4 @@ dnotify() {
 
 # load company / work specific aliases
 # shellcheck source=./.company_aliases.sh
-[[ -s "${HOME}/.company_aliases.sh" ]] && \. "${HOME}/.company_aliases.sh"
+[[ ! -s "${HOME}/.company_aliases.sh" ]] || \. "${HOME}/.company_aliases.sh"

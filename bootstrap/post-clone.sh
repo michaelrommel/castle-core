@@ -31,6 +31,11 @@ if ! is_mac && [[ ! -d "${HOME}/.oh-my-posh" ]]; then
 	curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "${HOME}/.oh-my-posh"
 fi
 
+if [[ ! -d "${HOME}/.zsh/zsh-autosuggestions" ]]; then
+	mkdir -p "${HOME}/.zsh"
+	git clone https://github.com/zsh-users/zsh-autosuggestions "${HOME}/.zsh/zsh-autosuggestions"
+fi
+
 cd "${HOME}" || exit
 touch .hushlogin
 
