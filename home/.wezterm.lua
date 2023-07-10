@@ -12,7 +12,7 @@ if in_wsl then
 	config.initial_rows = 24
 	config.initial_cols = 80
 else
-	config.initial_rows = 50
+	config.initial_rows = 45
 	config.initial_cols = 150
 end
 
