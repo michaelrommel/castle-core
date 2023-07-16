@@ -15,7 +15,7 @@
 					"background": "p:dark2",
 					"leading_diamond": "\ue0b6",
 					"trailing_diamond": "\ue0b0",
-					"template": "{{ if .SSHSession }}\ueb01 {{ .UserName }}@{{ .HostName }}{{else}}\uf015 {{ end }}"
+					"template": "{{ if or (.SSHSession) (.Root) }}\ueb01 {{ .UserName }}@{{ .HostName }}{{else}}\uf015 {{ end }}"
 				},
 				{
 					"type": "path",
