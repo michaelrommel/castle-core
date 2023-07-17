@@ -2,17 +2,20 @@
 
 # global aliases and functions
 alias sha="shasum -a 256"
-alias icat="kitty +kitten icat"
 alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-alias lr='ls -lahtr'
-alias ll='ls -lah'
 # shellcheck disable=SC2139
 alias vff="${HOME}/bin/vff.sh"
 # shellcheck disable=SC2139
 alias bgr="${HOME}/.bat/src/batgrep.sh"
+
 alias gll='git log --graph --pretty=oneline --abbrev-commit'
+alias gst='git status'
+alias gco='git commit'
+
 alias v='vim'
 
+alias lr='ls -lahtr'
+alias ll='ls -lah'
 if type l 2>/dev/null 1>&2; then
 	unalias 'l'
 fi
@@ -21,7 +24,6 @@ alias l='gls --color -lah --hyperlink=auto'
 lb() {
 	ls -lah --color=always $* | bat
 }
-
 export lb
 
 logtail() {
