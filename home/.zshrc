@@ -2,7 +2,7 @@
 [[ -f "${HOME}/.preinitialization.sh" ]] && source "${HOME}/.preinitialization.sh"
 
 # history settings
-HISTFILE=~/.zsh_history
+HISTFILE=${HOME}/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
