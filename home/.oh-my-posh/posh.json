@@ -35,7 +35,7 @@
 					"trailing_diamond": "\ue0b0",
 					"foreground": "p:light4",
 					"background": "p:dark2",
-					"template": " \uea83 {{ path .Path .Location }} ",
+					"template": "\uea83 {{ path .Path .Location }} ",
 					"properties": {
 						"max_depth": 4,
 						"style": "agnoster_short"
