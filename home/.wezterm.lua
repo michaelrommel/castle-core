@@ -3,9 +3,8 @@ local config = {}
 
 local fontname = 'VictorMono NF'
 local fontsize = 17
-local in_wsl = os.getenv('WSL_DISTRO_NAME') ~= nil
 
-if in_wsl then
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 	fontname = 'VictorMono NF'
 	fontsize = 13
 	config.default_domain = 'WSL:bullseye'
@@ -33,7 +32,7 @@ config.font_rules = {
 		italic = false,
 		font = wezterm.font {
 			family = fontname,
-			weight = 'Regular',
+			weight = 'Medium',
 		},
 	},
 	{
@@ -41,7 +40,7 @@ config.font_rules = {
 		italic = false,
 		font = wezterm.font {
 			family = fontname,
-			weight = 'Regular',
+			weight = 'Light',
 		},
 	},
 	{
@@ -67,7 +66,7 @@ config.font_rules = {
 		italic = true,
 		font = wezterm.font {
 			family = fontname,
-			weight = 'Light',
+			weight = 'ExtraLight',
 			style = 'Italic',
 		},
 	},

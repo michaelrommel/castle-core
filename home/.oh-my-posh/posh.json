@@ -83,7 +83,7 @@
 					"foreground_templates": ["{{ if gt .Code 0 }}p:bright_red{{ end }}"],
 					"leading_diamond": "<transparent,background>\ue0b0</>",
 					"trailing_diamond": "\ue0b4",
-					"template": " {{ if gt .Code 0 }}\uf00d {{.Code}}{{ else }}\uf00c {{ end }}",
+					"template": " {{ if gt .Code 0 }}\uf00d <b>{{.Code}}</b>{{ else }}\uf00c {{ end }}",
 					"properties": {
 						"always_enabled": true
 					}
