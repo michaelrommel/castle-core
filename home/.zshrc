@@ -4,8 +4,19 @@
 # history settings
 HISTFILE=${HOME}/.zsh_history
 HISTSIZE=10000
+# shellcheck disable=SC2034
+HIST_EXPIRE_DUPS_FIRST=1
+# shellcheck disable=SC2034
 SAVEHIST=10000
 setopt appendhistory
+
+# use up to search history for lines beginning with the same pattern
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+[[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-beginning-search
+[[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-beginning-search
 
 # case insensitive completion - was the only thing I used from oh-my-zsh
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
@@ -28,9 +39,11 @@ export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243"
 bindkey '^ ' autosuggest-accept
+# shellcheck disable=SC1094
 source "${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # prompt customization
+# shellcheck disable=SC2086
 [[ -f "${HOME}/.oh-my-posh/posh.json" ]] && eval "$(oh-my-posh init zsh --config ${HOME}/.oh-my-posh/posh.json)"
 
 # my personal initialization script 2nd part

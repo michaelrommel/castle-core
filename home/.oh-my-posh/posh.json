@@ -35,7 +35,7 @@
 					"trailing_diamond": "\ue0b0",
 					"foreground": "p:light4",
 					"background": "p:dark2",
-					"template": "\uea83 {{ path .Path .Location }} ",
+					"template": "\udb80\ude56 {{ path .Path .Location }} ",
 					"properties": {
 						"max_depth": 4,
 						"style": "agnoster_short"
@@ -169,7 +169,7 @@
 					"style": "plain",
 					"foreground": "p:dark4",
 					"background": "transparent",
-					"template": "in <p:light3><b>{{ .Name }}</b></> ",
+					"template": "\udb82\udddb <p:light3><b>{{ .Name }}</b></> ",
 					"min_width": 100
 				},
 				{
@@ -177,7 +177,7 @@
 					"style": "plain",
 					"foreground": "p:dark4",
 					"background": "transparent",
-					"template": "at <p:light3><b>{{ .CurrentDate | date \"15:04:05\" }}</b></>"
+					"template": "\uf43a <p:light3><b>{{ .CurrentDate | date \"15:04:05\" }}</b></>"
 				}
 			]
 		}
