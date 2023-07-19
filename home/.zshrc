@@ -2,13 +2,14 @@
 [[ -f "${HOME}/.preinitialization.sh" ]] && source "${HOME}/.preinitialization.sh"
 
 # history settings
-HISTFILE=${HOME}/.zsh_history
-HISTSIZE=10000
-# shellcheck disable=SC2034
-HIST_EXPIRE_DUPS_FIRST=1
-# shellcheck disable=SC2034
-SAVEHIST=10000
-setopt appendhistory
+export HISTFILE=${HOME}/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt append_history
+setopt hist_expire_dups_first
+setopt hist_ignore_all_dups
+setopt hist_ignore_space
+setopt hist_save_no_dups
 
 # use up to search history for lines beginning with the same pattern
 autoload -U up-line-or-beginning-search
