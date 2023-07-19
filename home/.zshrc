@@ -10,6 +10,7 @@ setopt hist_expire_dups_first
 setopt hist_ignore_all_dups
 setopt hist_ignore_space
 setopt hist_save_no_dups
+setopt extended_history
 
 # use up to search history for lines beginning with the same pattern
 autoload -U up-line-or-beginning-search
@@ -18,6 +19,11 @@ zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 [[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-beginning-search
 [[ -n ${key[Down]} ]] && bindkey "${key[Down]}" down-line-or-beginning-search
+# make Ctrl-K and Ctrl-J act like Up and Down
+bindkey -M viins ^K up-line-or-beginning-search
+bindkey -M viins ^J down-line-or-beginning-search
+bindkey -M vicmd ^K up-line-or-beginning-search
+bindkey -M vicmd ^J down-line-or-beginning-search
 
 # case insensitive completion - was the only thing I used from oh-my-zsh
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
