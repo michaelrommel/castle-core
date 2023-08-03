@@ -97,12 +97,46 @@ config.custom_block_glyphs = true
 config.freetype_load_target = "Light"
 config.freetype_render_target = "Light"
 -- see: https://github.com/dawikur/base16-gruvbox-scheme
-config.color_scheme = 'Gruvbox dark, hard (base16)'
+-- config.color_scheme = 'Gruvbox dark, hard (base16)'
+config.color_scheme = 'Gruvbox Dark Hard'
 config.window_padding = {
 	left = 0,
 	right = 0,
 	top = 0,
 	bottom = 0,
+}
+
+config.color_schemes = {
+	['Gruvbox Dark Hard'] = {
+		foreground = "#ebdbb2",
+		background = "#1d2021",
+		cursor_bg = "#d5c4a1",
+		cursor_border = "#ebdbb2",
+		cursor_fg = "#1d2021",
+		selection_bg = "#504945",
+		selection_fg = "#ebdbb2",
+
+		ansi = {
+			"#1d2021",
+			"#cc241d",
+			"#98971a",
+			"#d79921",
+			"#458588",
+			"#b16286",
+			"#689d6a",
+			"#a89984"
+		},
+		brights = {
+			"#928374",
+			"#fb4934",
+			"#b8bb26",
+			"#fabd2f",
+			"#83a598",
+			"#d3869b",
+			"#8ec07c",
+			"#fbf1c7"
+		}
+	},
 }
 
 return config
