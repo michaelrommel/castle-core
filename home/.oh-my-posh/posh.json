@@ -64,7 +64,8 @@
 						"fetch_status": true,
 						"fetch_upstream_icon": true,
 						"branch_identical_icon": "",
-						"branch_gone_icon": ""
+						"branch_gone_icon": "",
+						"tag_icon": "\uf412 "
 					}
 				},
 				{
