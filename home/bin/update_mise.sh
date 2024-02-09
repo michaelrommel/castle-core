@@ -22,8 +22,8 @@ get_arch() {
 	fi
 }
 
-update_rtx() {
-	echo "Updating rtx..."
+update_mise() {
+	echo "Updating mise..."
 	os="$(get_os)"
 	if [[ "${os}" == "macos" ]]; then
 		brew install mise
@@ -44,4 +44,4 @@ update_rtx() {
 	echo "done."
 }
 
-update_rtx
+update_mise
