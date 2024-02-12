@@ -7,9 +7,12 @@ local fontsize = 17
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 	fontname = 'VictorMono NF'
 	fontsize = 13
-	config.default_domain = 'WSL:bullseye'
-	config.initial_rows = 24
-	config.initial_cols = 80
+	-- config.default_domain = 'WSL:bullseye'
+	config.default_domain = 'WSL:bookworm'
+	-- config.initial_rows = 24
+	-- config.initial_cols = 80
+	config.initial_rows = 45
+	config.initial_cols = 150
 else
 	config.initial_rows = 45
 	config.initial_cols = 150
