@@ -13,6 +13,7 @@ alias gst='git status'
 alias gco='git commit'
 
 alias v='vim'
+alias fd='fd -H'
 
 alias lr='ls -lahtr'
 alias ll='ls -lah'
