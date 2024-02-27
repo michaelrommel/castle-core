@@ -49,8 +49,7 @@ fi
 
 # adjust gruvbos colors for 256 color terminals
 # shellcheck source=/home/rommel/bin/set_gruvbox_colors.sh
-[[ -s "${HOME}/bin/set_gruvbox_colors.sh" ]] &&
-	\. "${HOME}/bin/set_gruvbox_colors.sh"
+[[ -s "${HOME}/bin/set_gruvbox_colors.sh" ]] && "${HOME}/bin/set_gruvbox_colors.sh"
 
 # color for less and man
 export MANPAGER='less -r -s -M +Gg'
