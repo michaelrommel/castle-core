@@ -22,6 +22,20 @@ if [[ "${OSNAME}" != "Darwin" ]]; then
 	export LC_COLLATE="C.UTF-8"
 fi
 
+if TMUX_VERS_BIN=$(tmux 2>/dev/null -V); then
+	# get the correct tmux version, even if no server is running yet
+	if TMUX_VERS_SERVER=$(tmux 2>/dev/null display-message -p "#{version}"); then
+		# we got the server version, use this
+		# shellcheck disable=SC2001
+		TMUX_VERSION=$(echo "${TMUX_VERS_SERVER}" | sed -e 's/[^0-9.]*\([0-9.]*\)/\1/g')
+	else
+		# use the client version
+		# shellcheck disable=SC2001
+		TMUX_VERSION=$(echo "${TMUX_VERS_BIN}" | sed -e 's/[^0-9.]*\([0-9.]*\)/\1/g')
+	fi
+	export TMUX_VERSION
+fi
+
 # load authentication tokens
 # shellcheck source=/home/rommel/.gh_credentials.sh
 [[ -s "${HOME}/.gh_credentials.sh" ]] && source "${HOME}/.gh_credentials.sh"
