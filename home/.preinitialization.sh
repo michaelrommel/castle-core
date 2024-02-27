@@ -33,16 +33,10 @@ fi
 # [[ "${TERMINAL}" == "linux" ]] && "${HOME}/bin/set_gruvbox_colors.sh"
 # unset TERMINAL
 
-# adjust gruvbos colors
-if [[ "${OSNAME}" == "Darwin" ]]; then
-	# shellcheck source=/Users/rommel/.vim/plugged/gruvbox/gruvbox_256palette_osx.sh
-	[[ -s "${HOME}/.vim/plugged/gruvbox/gruvbox_256palette_osx.sh" ]] &&
-		\. "${HOME}/.vim/plugged/gruvbox/gruvbox_256palette_osx.sh"
-else
-	# shellcheck source=/home/rommel/.vim/plugged/gruvbox/gruvbox_256palette.sh
-	[[ -s "${HOME}/.vim/plugged/gruvbox/gruvbox_256palette.sh" ]] &&
-		\. "${HOME}/.vim/plugged/gruvbox/gruvbox_256palette.sh"
-fi
+# adjust gruvbos colors for 256 color terminals
+# shellcheck source=/home/rommel/bin/set_gruvbox_colors.sh
+[[ -s "${HOME}/bin/set_gruvbox_colors.sh" ]] &&
+	\. "${HOME}/bin/set_gruvbox_colors.sh"
 
 # color for less and man
 export MANPAGER='less -r -s -M +Gg'
