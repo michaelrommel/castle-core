@@ -15,6 +15,7 @@ export MOSH_ESCAPE_KEY='~'
 
 OSNAME=$("${UNAME}" -s)
 OSRELEASE=$("${UNAME}" -r)
+export OSNAME OSRELEASE
 
 # LC_ALL would override all settings, do not set that
 # LC_LANG is setting the default. It is set in /etc/default/locale
