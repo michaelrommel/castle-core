@@ -4,7 +4,7 @@ source "${HOME}/.homesick/helper.sh"
 
 echo "Installing basic packages"
 if is_mac; then
-	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick oh-my-posh)
+	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick)
 	missing=()
 	check_brewed "missing" "${desired[@]}"
 	if [[ "${#missing[@]}" -gt 0 ]]; then
@@ -24,7 +24,7 @@ else
 	fi
 fi
 
-if ! is_mac && [[ ! -d "${HOME}/.oh-my-posh" ]]; then
+if [[ ! -d "${HOME}/.oh-my-posh" ]]; then
 	echo "Installing oh-my-posh for zsh"
 	mkdir -p "${HOME}/.cache"
 	mkdir -p "${HOME}/.oh-my-posh"
