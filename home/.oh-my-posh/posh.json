@@ -80,7 +80,7 @@
 					"template": " \uf0e7 "
 				},
 				{
-					"type": "exit",
+					"type": "status",
 					"style": "diamond",
 					"foreground": "p:bright_green",
 					"background": "p:dark2",
