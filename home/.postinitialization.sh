@@ -14,6 +14,7 @@ alias gco='git commit'
 
 alias v='vim'
 alias fd='fd -H'
+alias grep='grep --colour=auto'
 
 alias lr='ls -lahtr'
 alias ll='ls -lah'
@@ -37,11 +38,9 @@ dnotify() {
 	IFS=" "
 	local body=$*
 	if [[ -z "${TMUX}" ]]; then
-		printf "\x1b]99;i=1:d=0;%s\x1b\\" "${title}"
-		printf "\x1b]99;i=1:d=1:p=body;%s\x1b\\" "${body}"
+		printf "\x1b]777;notify;%s;%s\x1b\\" "${title}" "${body}"
 	else
-		printf "\x1bPtmux;\x1b\x1b]99;i=1:d=0;%s\x1b\x1b\\" "${title}"
-		printf "\x1b\x1b]99;i=1:d=1:p=body;%s\x1b\x1b\\" "${body}"
+		printf "\x1bPtmux;\x1b\x1b]777;notify;%s;%s\x1b\x1b\\" "${title}" "${body}"
 	fi
 }
 if [[ "${OSNAME}" == "Linux" && "${OSRELEASE}" =~ "-microsoft-" ]]; then
