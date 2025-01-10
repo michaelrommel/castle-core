@@ -7,8 +7,8 @@ if [[ -z "${INPUT}" ]]; then
 	exit 1
 fi
 
-BASE=$(basename ${INPUT} ".cast")
-DIR=$(dirname ${INPUT})
+BASE=$(basename "${INPUT}" ".cast")
+DIR=$(dirname "${INPUT}")
 
 agg \
 	--font-size 28 \
