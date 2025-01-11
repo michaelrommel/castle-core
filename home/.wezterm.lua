@@ -17,7 +17,9 @@ else
 	config.initial_rows = 45
 	config.initial_cols = 150
 end
-
+-- set the terminal to a proper entry, needs then to be installed
+-- everywhere...
+config.term = "wezterm"
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 config.use_fancy_tab_bar = true
 config.font = wezterm.font(fontname)
