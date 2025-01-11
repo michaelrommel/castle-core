@@ -2,9 +2,20 @@
 
 source "${HOME}/.homesick/helper.sh"
 
+get_arch() {
+	arch="$(uname -m)"
+	if [ "$arch" = x86_64 ]; then
+		echo "x86_64"
+	elif [ "$arch" = aarch64 ] || [ "$arch" = arm64 ]; then
+		echo "aarch64"
+	else
+		error "unsupported architecture: $arch"
+	fi
+}
+
 echo "Installing basic packages"
 if is_mac; then
-	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick)
+	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick yazi)
 	missing=()
 	check_brewed "missing" "${desired[@]}"
 	if [[ "${#missing[@]}" -gt 0 ]]; then
@@ -35,6 +46,29 @@ fi
 if [[ ! -d "${HOME}/.zsh/zsh-autosuggestions" ]]; then
 	mkdir -p "${HOME}/.zsh"
 	git clone https://github.com/zsh-users/zsh-autosuggestions "${HOME}/.zsh/zsh-autosuggestions"
+fi
+
+if ! is_mac; then
+	if [[ ! -d "${HOME}/.yazi" ]]; then
+		echo "Installing yazi"
+		arch="$(get_arch)"
+		mkdir -p "${HOME}/bin"
+		mkdir -p "${HOME}/.yazi"
+		latest=$(curl -s https://api.github.com/repositories/663900193/tags | jq -r ".[0].name")
+		echo "Latest release seems to be: ${latest}"
+		TMPDIR=$(mktemp -d /tmp/yazi.XXXXXX) || exit 1
+		if ! curl -sL "https://github.com/sxyazi/yazi/releases/download/${latest}/yazi-${arch}-unknown-linux-gnu.zip" -o "${TMPDIR}/yazi.zip"; then
+			echo "Download of yazi failed. Aborting."
+			exit 1
+		fi
+		cd "${TMPDIR}" || exit
+		unzip yazi.zip
+		cd "yazi-${arch}-unknown-linux-gnu" || exit
+		cp yazi "${HOME}/bin/yazi"
+		chmod 755 "${HOME}/bin/yazi"
+		cp completions/{ya,yazi}.bash "${HOME}/.yazi/"
+		rm -rf "${TMPDIR}"
+	fi
 fi
 
 cd "${HOME}" || exit
