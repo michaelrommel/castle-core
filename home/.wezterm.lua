@@ -5,20 +5,28 @@ local fontname = 'VictorMono NF'
 local fontsize = 17
 
 if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+	config.launch_menu = {
+		{
+			label = "cygwin",
+			args = { "cmd.exe", "/c", "c:/cygwin64/bin/bash.exe --login -i" },
+			domain = 'DefaultDomain'
+		}
+	}
+	-- config.default_cwd = "C:/cygwin64/bin"
+	-- config.default_prog = { "cmd.exe", "/c", "c:/cygwin64/bin/bash.exe --login -i" }
+	-- config.default_domain = 'WSL:bookworm'
+	-- config.default_domain = 'WSL:neoplain'
+	config.default_domain = 'SSH:WSL'
+	config.ssh_backend = "Ssh2"
 	fontname = 'VictorMono NF'
 	fontsize = 13
-	-- config.default_domain = 'WSL:bullseye'
-	config.default_domain = 'WSL:bookworm'
-	-- config.initial_rows = 24
-	-- config.initial_cols = 80
-	config.initial_rows = 45
-	config.initial_cols = 150
+	config.initial_rows = 40
+	config.initial_cols = 120
 else
 	config.initial_rows = 45
 	config.initial_cols = 150
 end
--- set the terminal to a proper entry, needs then to be installed
--- everywhere...
+
 config.term = "wezterm"
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 config.use_fancy_tab_bar = true
@@ -99,6 +107,8 @@ config.allow_square_glyphs_to_overflow_width = "Always"
 -- this is needed because otherwise box drawing characters can overlap
 -- e.g. when displaying a tree which causes brightness variations
 config.custom_block_glyphs = true
+-- uncomment the following to disable ligatures
+-- config.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
 config.freetype_load_target = "Light"
 config.freetype_render_target = "Light"
 -- see: https://github.com/dawikur/base16-gruvbox-scheme
