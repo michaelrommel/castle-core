@@ -1,12 +1,5 @@
 [plugin]
+deps = [{ use = "yazi-rs/plugins:mime-ext", rev = "600614a" }, { use = "yazi-rs/plugins:jump-to-char", rev = "600614a" }, { use = "michaelrommel/svg-preview", rev = "9774c3c" }]
+
+[flavor]
 deps = []
-
-[[flavor.deps]]
-use = "BennyOe/onedark"
-rev = "fa1da70"
-hash = "b644cb6471caf78333fc1b3940ba3ca9"
-
-[[flavor.deps]]
-use = "bennyyip/gruvbox-dark"
-rev = "b4cc9f2"
-hash = "f44c42bcbed3c8564100e45e2fe3649a"

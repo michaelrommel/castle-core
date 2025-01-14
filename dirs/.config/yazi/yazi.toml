@@ -19,8 +19,8 @@ title_format   = "Yazi: {cwd}"
 [preview]
 wrap            = "no"
 tab_size        = 4
-max_width       = 3200
-max_height      = 2400
+max_width       = 1024
+max_height      = 768
 cache_dir       = ""
 image_delay     = 100
 image_filter    = "triangle"
@@ -106,6 +106,7 @@ spotters = [
 ]
 preloaders = [
 	# Image
+	{ mime = "image/svg+xml}", run = "svg-preview" },
 	{ mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
 	{ mime = "image/*", run = "image" },
 	# Video
@@ -124,6 +125,7 @@ previewers = [
 	# JSON
 	{ mime = "application/{json,ndjson}", run = "json" },
 	# Image
+	{ mime = "image/svg+xml}", run = "svg-preview" },
 	{ mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
 	{ mime = "image/*", run = "image" },
 	# Video
@@ -146,6 +148,13 @@ previewers = [
 	# Fallback
 	{ name = "*", run = "file" },
 ]
+
+[[plugin.prepend_fetchers]]
+id   = "mime"
+if   = "!(mime|dummy)"
+name = "*"
+run  = "mime-ext"
+prio = "high"
 
 [input]
 cursor_blink = false
