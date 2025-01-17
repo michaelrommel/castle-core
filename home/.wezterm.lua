@@ -23,11 +23,11 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 	config.initial_rows = 40
 	config.initial_cols = 120
 else
+	config.term = "wezterm"
 	config.initial_rows = 45
 	config.initial_cols = 150
 end
 
-config.term = "wezterm"
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 config.use_fancy_tab_bar = true
 config.font = wezterm.font(fontname)
@@ -125,7 +125,8 @@ config.color_schemes = {
 	['Gruvbox Dark Hard'] = {
 		foreground = "#ebdbb2",
 		background = "#1d2021",
-		cursor_bg = "#d5c4a1",
+		-- cursor_bg = "#d5c4a1",
+		cursor_bg = "#d79921",
 		cursor_border = "#ebdbb2",
 		cursor_fg = "#1d2021",
 		selection_bg = "#504945",
