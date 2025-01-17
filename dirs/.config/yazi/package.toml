@@ -1,5 +1,5 @@
 [plugin]
-deps = [{ use = "yazi-rs/plugins:mime-ext", rev = "600614a" }, { use = "yazi-rs/plugins:jump-to-char", rev = "600614a" }, { use = "michaelrommel/svg-preview", rev = "9774c3c" }]
+deps = [{ use = "yazi-rs/plugins:mime-ext", rev = "600614a" }, { use = "yazi-rs/plugins:jump-to-char", rev = "600614a" }, { use = "michaelrommel/svg-preview", rev = "9774c3c" }, { use = "reledia/hexyl", rev = "39d3d4e" }, { use = "yazi-rs/plugins:max-preview", rev = "600614a" }]
 
 [flavor]
 deps = []
