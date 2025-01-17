@@ -25,6 +25,29 @@ bindkey -M viins ^J down-line-or-beginning-search
 bindkey -M vicmd ^K up-line-or-beginning-search
 bindkey -M vicmd ^J down-line-or-beginning-search
 
+# Change cursor shape for different vi modes.
+_fix_cursor() {
+	echo -ne '\e[6 q'
+}
+function zle-keymap-select {
+	if [[ ${KEYMAP} == vicmd ]] ||
+		[[ $1 = 'block' ]]; then
+		echo -ne '\e[2 q'
+	elif [[ ${KEYMAP} == main ]] ||
+		[[ ${KEYMAP} == viins ]] ||
+		[[ ${KEYMAP} = '' ]] ||
+		[[ $1 = 'beam' ]]; then
+		_fix_cursor
+	fi
+}
+zle -N zle-keymap-select
+# function zle-line-init() {
+#     zle -K viins
+#     echo -ne "\e[5 q"
+# }
+# zle -N zle-line-init
+precmd_functions+=(_fix_cursor)
+
 # case insensitive completion - was the only thing I used from oh-my-zsh
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
