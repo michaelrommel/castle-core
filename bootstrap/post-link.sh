@@ -9,14 +9,16 @@ if is_wsl; then
 	ln -sf wsl2-relay-agent.sh ssh-agent
 fi
 
-echo "Creating current terminfo files"
+echo -n "Creating current terminfo files: "
 cd "${HOME}" || exit
 for t in tmux mintty xterm-ghostty wezterm xterm-kitty; do 
+	echo -n "${t} "
 	if is_mac; then
 		if ! infocmp ${t} 2>/dev/null 1>&2; then
-			sudo /usr/bin/tic -x "${HOME}/.terminfo_src/${t}.terminfo" 2>/dev/null
+			/usr/bin/tic -x "${HOME}/.terminfo_src/${t}.terminfo" 2>/dev/null
 		fi
 	else
 		/usr/bin/tic -x "${HOME}/.terminfo_src/${t}.terminfo" 2>/dev/null
 	fi
 done
+echo " - done"
