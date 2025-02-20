@@ -78,3 +78,4 @@ source "${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # my personal initialization script 2nd part
 [[ -f "${HOME}/.postinitialization.sh" ]] && source "${HOME}/.postinitialization.sh"
+source "${HOME}/.minimalrc"

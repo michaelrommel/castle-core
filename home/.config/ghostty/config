@@ -1899,7 +1899,7 @@ macos-non-native-fullscreen = false
 # most cases.
 # 
 # Changing this option at runtime only applies to new windows.
-macos-titlebar-style = tabs
+macos-titlebar-style = native
 
 # Whether the proxy icon in the macOS titlebar is visible. The proxy icon
 # is the icon that represents the folder of the current working directory.
@@ -1956,7 +1956,7 @@ macos-titlebar-proxy-icon = visible
 # key, respectively.
 # 
 # This does not work with GLFW builds.
-macos-option-as-alt = true
+macos-option-as-alt = false
 
 # Whether to enable the macOS window shadow. The default value is true.
 # With some window managers and window transparency settings, you may
