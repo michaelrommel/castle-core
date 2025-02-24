@@ -1415,7 +1415,7 @@ window-step-resize = false
 #     or at the end if there are no focused tabs.
 # 
 #   * `end` - Insert the new tab at the end of the tab list.
-window-new-tab-position = current
+window-new-tab-position = end
 
 # Background color for the window titlebar. This only takes effect if
 # window-theme is set to ghostty. Currently only supported in the GTK app
@@ -1920,7 +1920,7 @@ macos-titlebar-style = native
 # Therefore, to make this work after changing the setting, you must
 # usually `cd` to a different directory, open a different file in an
 # editor, etc.
-macos-titlebar-proxy-icon = visible
+macos-titlebar-proxy-icon = hidden
 
 # macOS doesn't have a distinct "alt" key and instead has the "option"
 # key which behaves slightly differently. On macOS by default, the
