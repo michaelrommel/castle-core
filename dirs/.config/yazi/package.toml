@@ -1,5 +1,27 @@
-[plugin]
-deps = [{ use = "yazi-rs/plugins:mime-ext", rev = "600614a" }, { use = "yazi-rs/plugins:jump-to-char", rev = "600614a" }, { use = "michaelrommel/svg-preview", rev = "9774c3c" }, { use = "reledia/hexyl", rev = "39d3d4e" }, { use = "yazi-rs/plugins:max-preview", rev = "600614a" }]
+[[plugin.deps]]
+use = "yazi-rs/plugins:mime-ext"
+rev = "5186af7"
+hash = "b03f3d80d26b6d7bb490b1380e9cb754"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:jump-to-char"
+rev = "5186af7"
+hash = "af11685de39c366ec1137fcbccacdbff"
+
+[[plugin.deps]]
+use = "michaelrommel/svg-preview"
+rev = "29549c2"
+hash = "dd6ec7253e3a09ea967ac3b047a64ea0"
+
+[[plugin.deps]]
+use = "reledia/hexyl"
+rev = "228a9ef"
+hash = "cdc65cfe4e60e1bf5afe5769d074fa9c"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:max-preview"
+rev = "5186af7"
+hash = "a8025f2bb311e869069364fba01abffc"
 
 [flavor]
 deps = []
