@@ -86,6 +86,7 @@ config.font_rules = {
 }
 config.font_size = fontsize
 config.line_height = 1.00
+-- config.bold_brightens_ansi_colors = "BrightAndBold"
 config.bold_brightens_ansi_colors = "No"
 config.audible_bell = "Disabled"
 config.visual_bell = {

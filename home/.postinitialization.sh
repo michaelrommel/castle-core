@@ -23,6 +23,14 @@ if type l 2>/dev/null 1>&2; then
 fi
 alias l='gls --color -lah --hyperlink=auto'
 
+fcd() {
+	NEWCWD=$(fd --type d --hidden --exclude .git --exclude node_modules --exclude .cache | fzf)
+	# shellcheck disable=SC2181
+	if [[ $? -eq 0 ]]; then
+		cd "${NEWCWD}" || exit
+	fi
+}
+
 lb() {
 	ls -lah --color=always $* | bat
 }

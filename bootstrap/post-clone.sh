@@ -2,6 +2,17 @@
 
 source "${HOME}/.homesick/helper.sh"
 
+get_os() {
+	os="$(uname -s)"
+	if [ "$os" = Darwin ]; then
+		echo "apple-darwin"
+	elif [ "$os" = Linux ]; then
+		echo "unknown-linux-musl"
+	else
+		error "unsupported OS: $os"
+	fi
+}
+
 get_arch() {
 	arch="$(uname -m)"
 	if [ "$arch" = x86_64 ]; then
@@ -49,6 +60,7 @@ if [[ ! -d "${HOME}/.zsh/zsh-autosuggestions" ]]; then
 fi
 
 if ! is_mac; then
+	# column oriented file manager
 	if [[ ! -d "${HOME}/.yazi" ]]; then
 		echo "Installing yazi"
 		arch="$(get_arch)"
@@ -68,6 +80,26 @@ if ! is_mac; then
 		chmod 755 "${HOME}/bin/yazi"
 		cp completions/{ya,yazi}.bash "${HOME}/.yazi/"
 		rm -rf "${TMPDIR}"
+		echo "done."
+	fi
+	# smarter "cd"
+	if [[ ! -f "${HOME}/bin/zoxide" ]]; then
+		echo "Installing zoxide..."
+		arch="$(get_arch)"
+		mkdir -p "${HOME}/bin"
+		latest=$(curl -s https://api.github.com/repositories/245166720/tags | jq -r ".[0].name")
+		echo "Latest release seems to be: ${latest}"
+		TMPDIR=$(mktemp -d /tmp/zoxide.XXXXXX) || exit 1
+		if ! curl -sL "https://github.com/ajeetdsouza/zoxide/releases/download/${latest}/zoxide-$latest}-${arch}-unknown-linux-musl.tar.gz" -o "${TMPDIR}/zoxide.tar.gz"; then
+			echo "Download failed. Aborting."
+			exit 1
+		fi
+		cd "${TMPDIR///}" || exit
+		tar xf zoxide.tar.gz
+		cp zoxide "${HOME}/bin/zoxide"
+		chmod 755 "${HOME}/bin/zoxide"
+		rm -rf "${TMPDIR}"
+		echo "done."
 	fi
 fi
 
