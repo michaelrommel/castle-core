@@ -90,11 +90,11 @@ if ! is_mac; then
 		latest=$(curl -s https://api.github.com/repositories/245166720/tags | jq -r ".[0].name")
 		echo "Latest release seems to be: ${latest}"
 		TMPDIR=$(mktemp -d /tmp/zoxide.XXXXXX) || exit 1
-		if ! curl -sL "https://github.com/ajeetdsouza/zoxide/releases/download/${latest}/zoxide-$latest}-${arch}-unknown-linux-musl.tar.gz" -o "${TMPDIR}/zoxide.tar.gz"; then
+		if ! curl -sL "https://github.com/ajeetdsouza/zoxide/releases/download/${latest}/zoxide-${latest#v}-${arch}-unknown-linux-musl.tar.gz" -o "${TMPDIR}/zoxide.tar.gz"; then
 			echo "Download failed. Aborting."
 			exit 1
 		fi
-		cd "${TMPDIR///}" || exit
+		cd "${TMPDIR}" || exit
 		tar xf zoxide.tar.gz
 		cp zoxide "${HOME}/bin/zoxide"
 		chmod 755 "${HOME}/bin/zoxide"
