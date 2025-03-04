@@ -1,3 +1,12 @@
+(platform (macos)
+	(defcfg
+	  macos-dev-names-exclude (
+		"Device name 1"
+		"Device name 2"
+	  )
+	)
+)
+
 (defcfg
   process-unmapped-keys yes
   concurrent-tap-hold yes
@@ -5,41 +14,92 @@
 
 (defsrc
        q w e r t y u i o p
-  lctl a s d f g h j k l ; '
-  lsft z x c v b n m , . /
-       lalt          ralt
+  caps a s d f g h j k l ; '
+  lsft z x c v b n m , . / rsft
+  lctl  lalt   spc   ralt
 )
 (defvar
-  tap-time 150
-  hold-time 200
+  tap-time 600
+  hold-time 400
+)
+
+(defvirtualkeys
+  shift (multi (layer-switch base) lsft)
+  clear (multi (layer-switch base) (on-press release-virtualkey shift))
+  ;; clear (layer-switch base)
 )
 
 (defalias
-  escctl (tap-hold-release 100 100 esc lctl)
-  tabsft (tap-hold-release 100 100 tab lsft)
-  a (tap-hold-release $tap-time $hold-time a lsft)
-  s (tap-hold-release $tap-time $hold-time s lmet)
-  d (tap-hold-release $tap-time $hold-time d lalt)
-  f (tap-hold-release $tap-time $hold-time f lctl)
-  j (tap-hold-release $tap-time $hold-time j rctl)
-  k (tap-hold-release $tap-time $hold-time k ralt)
-  l (tap-hold-release $tap-time $hold-time l rmet)
-  ; (tap-hold-release $tap-time $hold-time ; rsft)
-  cdll (tap-hold-release 200 200 lalt (layer-toggle code))
-  cdlr (tap-hold-release 200 200 ralt (layer-toggle code))
+    escctl (tap-hold-release $tap-time $hold-time esc lctl)
+	tabsft (tap-hold-release $tap-time $hold-time tab lsft)
+	a (tap-hold-release $tap-time $hold-time a lsft)
+	s (tap-hold-release $tap-time $hold-time s lmet)
+	d (tap-hold-release $tap-time $hold-time d lalt)
+	f (tap-hold-release $tap-time $hold-time f lctl)
+	j (tap-hold-release $tap-time $hold-time j rctl)
+	k (tap-hold-release $tap-time $hold-time k ralt)
+	l (tap-hold-release $tap-time $hold-time l rmet)
+	; (tap-hold-release $tap-time $hold-time ; rsft)
+	uml (switch
+		;; ((key-timing 1 less-than 100)) _ break 
+		() (tap-hold-release-timeout 200 500 lalt (multi (layer-switch umlaut) (on-release tap-virtualkey clear)) lalt) break
+	)
+	cdl (switch
+		;; ((key-timing 1 less-than 100)) _ break 
+		() (tap-hold-release-timeout 200 500 spc (multi (layer-switch code) (on-release tap-virtualkey clear)) spc) break
+	)
+	ae (switch
+		((input real rsft)) (unicode Ä) break
+		((input real ;)) (unicode Ä) break
+		()(unicode ä) break
+	)
+	oe (switch
+		((input real lsft)) (unicode Ö) break
+		((input real a)) (unicode Ö) break
+		()(unicode ö) break
+	)
+	ue (switch
+		((input real lsft)) (unicode Ü) break
+		((input real a)) (unicode Ü) break
+		()(unicode ü) break
+	)
+	ss (unicode ß)
 )
 
 (deflayer base
            q  w  e  r  t  y    u     i     o    p 
-   @escctl @a @s @d @f g  h    @j    @k    @l   @;   '
-   @tabsft z  x  c  v  b  n    m     ,     .    /
-           @cdll                     @cdlr
+   @escctl @a @s @d @f g  h    @j    @k    @l   @;   bspc
+   @tabsft z  x  c  v  b  n    m     ,     .    /    '
+   @escctl @uml     @cdl             @uml
 )
 
 (deflayer code
            =    7  8  9  0  {    }    pgup  S-9   S-0
    -       lsft 4  5  6  ,  left down up    right rsft   _
-   _       `    1  2  3  .  [    ]    pgdn  \     _
-            lalt                      ralt
+   _       `    1  2  3  .  [    ]    pgdn  _     \      _
+   -       lctl     _                rctl
+)
+
+(deflayer umlaut
+           _    _   _  _  _  _    @ue  _     @oe   _  
+   _       @ae  @ss _  _  _  _    _    _     _     _      _
+   _       _    _   _  _  _  _    _    _     _     _      _
+   _        _          _               _   
+)
+
+(defoverrides
+  (lalt lsft 4) (PrintScreen)
+  (ralt rsft 4) (PrintScreen)
+  (rmet 4) (PrintScreen)
+  (lalt lsft 5) (alt PrintScreen)
+  (ralt rsft 5) (alt PrintScreen)
+  (rmet 5) (alt PrintScreen)
+  (lalt lctl j) (pgdn)
+  (lalt lctl k) (pgup)
+  (lalt lmet k) (lalt lmet F19)
+  (lalt lmet left) (lalt lmet F20)
+  (lalt lmet up) (lalt lmet F22)
+  (lalt lmet right) (lalt lmet F24)
+  (lalt lmet down) (lalt lmet F21)
 )
 
