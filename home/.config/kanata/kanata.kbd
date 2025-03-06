@@ -69,14 +69,14 @@
 (deflayer base
            q  w  e  r  t  y    u     i     o    p 
    @escctl @a @s @d @f g  h    @j    @k    @l   @;   bspc
-   @tabsft z  x  c  v  b  n    m     ,     .    /    '
+   tab z  x  c  v  b  n    m     ,     .    /    '
    @escctl @uml     @cdl             @uml
 )
 
 (deflayer code
            =    7  8  9  0  {    }    pgup  S-9   S-0
    -       lsft 4  5  6  ,  left down up    right rsft   _
-   _       `    1  2  3  .  [    ]    pgdn  _     \      _
+   _       S-1   1  2  3  .  [    ]    pgdn  `     \      _
    -       lctl     _                rctl
 )
 
