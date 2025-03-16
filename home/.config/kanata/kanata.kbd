@@ -34,7 +34,7 @@
 )
 
 (defalias
-    escctl (tap-hold-release $tap-time $hold-time esc lctl)
+	escctl (tap-hold-release $tap-time $hold-time esc lctl)
 	tabsft (tap-hold-release $tap-time $hold-time tab lsft)
 	a (tap-hold-release $tap-time $hold-time a lsft)
 	s (tap-hold-release $tap-time $hold-time s lmet)
@@ -46,11 +46,11 @@
 	; (tap-hold-release $tap-time $hold-time ; rsft)
 	uml (switch
 		;; ((key-timing 1 less-than 100)) _ break 
-		() (tap-hold-release-timeout 200 500 lalt (multi (layer-switch umlaut) (on-release tap-virtualkey clear)) lalt) break
+		() (tap-hold-release 200 500 lalt (multi (layer-switch umlaut) (on-release tap-virtualkey clear))) break
 	)
 	cdl (switch
 		;; ((key-timing 1 less-than 100)) _ break 
-		() (tap-hold-release-timeout 200 500 spc (multi (layer-switch code) (on-release tap-virtualkey clear)) spc) break
+		() (tap-hold-release 200 500 spc (multi (layer-switch code) (on-release tap-virtualkey clear))) break
 	)
 	ae (switch
 		((input real rsft)) (unicode Ä) break
