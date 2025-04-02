@@ -23,7 +23,7 @@
   lctl  lalt   spc   ralt
 )
 (defvar
-  tap-time 175
+  tap-time 100
   cursor-tap-time 300
   hold-time 200
 )
@@ -31,12 +31,12 @@
 (defvirtualkeys
   shift (multi (layer-switch base) lsft)
   clear (multi (layer-switch base) (on-press release-virtualkey shift))
-  ;; clear (layer-switch base)
 )
 
 (defalias
 	escctl (tap-hold-release $tap-time $hold-time esc lctl)
 	tabsft (tap-hold-release $tap-time $hold-time tab lsft)
+	;; make the double tap repeat action shorter for keys where I seldomly use repeats, only hjkl
 	a (tap-hold-release $tap-time $hold-time a lsft)
 	s (tap-hold-release $tap-time $hold-time s lmet)
 	d (tap-hold-release $tap-time $hold-time d lalt)
@@ -46,11 +46,9 @@
 	l (tap-hold-release $cursor-tap-time $hold-time l rmet)
 	; (tap-hold-release $tap-time $hold-time ; rsft)
 	uml (switch
-		;; ((key-timing 1 less-than 100)) _ break 
 		() (tap-hold-release 200 500 lalt (multi (layer-switch umlaut) (on-release tap-virtualkey clear))) break
 	)
 	cdl (switch
-		;; ((key-timing 1 less-than 100)) _ break 
 		() (tap-hold-release 200 500 spc (multi (layer-switch code) (on-release tap-virtualkey clear))) break
 	)
 	ae (switch
@@ -79,7 +77,7 @@
 )
 
 (deflayer code
-           =    7  8  9  0  {    }    pgup  S-9   S-0
+           =    7  8  9  0  S-[  S-]  pgup  S-9   S-0
    -       lsft 4  5  6  ,  left down up    right rsft   _
    _       S-1  1  2  3  .  [    ]    pgdn  `     \      _
    -       lctl     _                rctl
