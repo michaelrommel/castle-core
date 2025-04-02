@@ -23,8 +23,9 @@
   lctl  lalt   spc   ralt
 )
 (defvar
-  tap-time 600
-  hold-time 400
+  tap-time 175
+  cursor-tap-time 300
+  hold-time 200
 )
 
 (defvirtualkeys
@@ -40,9 +41,9 @@
 	s (tap-hold-release $tap-time $hold-time s lmet)
 	d (tap-hold-release $tap-time $hold-time d lalt)
 	f (tap-hold-release $tap-time $hold-time f lctl)
-	j (tap-hold-release $tap-time $hold-time j rctl)
-	k (tap-hold-release $tap-time $hold-time k ralt)
-	l (tap-hold-release $tap-time $hold-time l rmet)
+	j (tap-hold-release $cursor-tap-time $hold-time j rctl)
+	k (tap-hold-release $cursor-tap-time $hold-time k ralt)
+	l (tap-hold-release $cursor-tap-time $hold-time l rmet)
 	; (tap-hold-release $tap-time $hold-time ; rsft)
 	uml (switch
 		;; ((key-timing 1 less-than 100)) _ break 
