@@ -100,6 +100,8 @@ config.colors = {
 	visual_bell = '#202324',
 }
 
+config.enable_csi_u_key_encoding = true
+config.enable_kitty_keyboard = true
 config.treat_east_asian_ambiguous_width_as_wide = false
 config.unicode_version = 9
 -- config.normalize_output_to_unicode_nfc = true
