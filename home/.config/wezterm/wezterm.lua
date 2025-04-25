@@ -14,14 +14,15 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 	}
 	-- config.default_cwd = "C:/cygwin64/bin"
 	-- config.default_prog = { "cmd.exe", "/c", "c:/cygwin64/bin/bash.exe --login -i" }
-	-- config.default_domain = 'WSL:bookworm'
+	config.default_domain = 'WSL:bookworm'
 	-- config.default_domain = 'WSL:neoplain'
-	config.default_domain = 'SSH:WSL'
+	-- config.default_domain = 'SSH:WSL'
 	config.ssh_backend = "Ssh2"
 	fontname = 'VictorMono NF'
 	fontsize = 13
 	config.initial_rows = 40
 	config.initial_cols = 120
+	config.allow_win32_input_mode = false
 else
 	config.term = "wezterm"
 	config.initial_rows = 45
@@ -101,12 +102,13 @@ config.colors = {
 }
 
 config.enable_csi_u_key_encoding = true
-config.enable_kitty_keyboard = true
+config.disable_default_key_bindings = true
+
 config.treat_east_asian_ambiguous_width_as_wide = false
 config.unicode_version = 9
 -- config.normalize_output_to_unicode_nfc = true
 config.allow_square_glyphs_to_overflow_width = "Always"
--- config.allow_square_glyphs_to_overflow_width = "Never"
+-- config.allow_square_glyphs_to_overflow_width = "never"
 -- this is needed because otherwise box drawing characters can overlap
 -- e.g. when displaying a tree which causes brightness variations
 config.custom_block_glyphs = true
