@@ -22,7 +22,7 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 	fontsize = 13
 	config.initial_rows = 40
 	config.initial_cols = 120
-	config.allow_win32_input_mode = false
+	-- config.allow_win32_input_mode = false
 else
 	config.term = "wezterm"
 	config.initial_rows = 45
@@ -101,9 +101,10 @@ config.colors = {
 	visual_bell = '#202324',
 }
 
-config.enable_csi_u_key_encoding = true
+-- config.debug_key_events = true
 config.disable_default_key_bindings = true
-
+config.enable_csi_u_key_encoding = true
+config.enable_kitty_keyboard = true
 config.treat_east_asian_ambiguous_width_as_wide = false
 config.unicode_version = 9
 -- config.normalize_output_to_unicode_nfc = true
