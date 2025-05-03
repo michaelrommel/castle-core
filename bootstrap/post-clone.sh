@@ -26,7 +26,7 @@ get_arch() {
 
 echo "Installing basic packages"
 if is_mac; then
-	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick yazi)
+	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick yazi carapace)
 	missing=()
 	check_brewed "missing" "${desired[@]}"
 	if [[ "${#missing[@]}" -gt 0 ]]; then
@@ -98,6 +98,28 @@ if ! is_mac; then
 		tar xf zoxide.tar.gz
 		cp zoxide "${HOME}/bin/zoxide"
 		chmod 755 "${HOME}/bin/zoxide"
+		rm -rf "${TMPDIR}"
+		echo "done."
+	fi
+	# smarter "cd"
+	if [[ ! -f "${HOME}/bin/carapace" ]]; then
+		echo "Installing carapace..."
+		arch="$(get_arch)"
+		if [[ "$arch" == "x86_64" ]]; then
+			arch="amd64"
+		fi
+		mkdir -p "${HOME}/bin"
+		latest=$(curl -s https://api.github.com/repositories/257400448/tags | jq -r ".[0].name")
+		echo "Latest release seems to be: ${latest}"
+		TMPDIR=$(mktemp -d /tmp/carapace.XXXXXX) || exit 1
+		if ! curl -sL "https://github.com/carapace-sh/carapace-bin/releases/download/${latest}/carapace-bin_${latest#v}_linux_${arch}.tar.gz" -o "${TMPDIR}/carapace.tar.gz"; then
+			echo "Download failed. Aborting."
+			exit 1
+		fi
+		cd "${TMPDIR}" || exit
+		tar xf carapace.tar.gz
+		cp carapace "${HOME}/bin/carapace"
+		chmod 755 "${HOME}/bin/carapace"
 		rm -rf "${TMPDIR}"
 		echo "done."
 	fi
