@@ -53,12 +53,18 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 
 # Complete . and .. special directories
 zstyle ':completion:*' special-dirs true
+zstyle ':completion:*' list-dirs-first true
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ''
 # shellcheck disable=SC2296
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}" "ma=48;5;4;38;5;255" 
+zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}" "ma=48;5;4;38;5;255" 
 # Don't complete unavailable commands.
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
+# General styling
+zstyle ':completion:*:corrections'   format '%F{green}  %d (errors: %e)  %f'
+zstyle ':completion:*:descriptions'  format '%F{blue}  %d  %f'
+zstyle ':completion:*:messages'      format '%B%F{magenta}  %U%d%u  %f%b'
+zstyle ':completion:*:warnings'      format '%B%F{red} %Uno matches found%u %f%b'
 
 # Kill
 # shellcheck disable=SC2016
@@ -76,6 +82,7 @@ autoload -Uz compinit && compinit
 
 # autosuggestion
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export ZSH_AUTOSUGGEST_USE_ASYNC=true
 export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243"
