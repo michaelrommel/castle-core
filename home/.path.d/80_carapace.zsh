@@ -8,4 +8,5 @@ if [[ "$?" -eq 0 ]]; then
 	zstyle ':completion:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
 	autoload -Uz compinit && compinit
 	source <(carapace _carapace)
+	# source <(~/.local/share/mise/installs/go/1.24.2/bin/carapace _carapace)
 fi

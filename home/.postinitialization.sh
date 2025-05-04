@@ -1,11 +1,10 @@
 #! /bin/bash
+# shellcheck disable=SC2139
 
 # global aliases and functions
 alias sha="shasum -a 256"
 alias ff="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
-# shellcheck disable=SC2139
 alias vff="${HOME}/bin/vff.sh"
-# shellcheck disable=SC2139
 alias bgr="${HOME}/.bat/src/batgrep.sh"
 
 alias gll='git log --graph --pretty=oneline --abbrev-commit'
@@ -16,12 +15,24 @@ alias v='vim'
 alias fd='fd -H'
 alias grep='grep --colour=auto'
 
-alias lr='ls -lahtr'
-alias ll='ls -lah'
+if [[ "${OSNAME}" == "Darwin" ]]; then
+	LS='gls'
+fi
 if type l 2>/dev/null 1>&2; then
 	unalias 'l'
 fi
-alias l='gls --color -lah --hyperlink=auto'
+alias l="${LS} -lah --color --hyperlink=auto"
+alias ll="${LS} -lah --color --hyperlink=auto"
+alias lr="${LS} -lahtr --color --hyperlink=auto"
+
+lb() {
+	${LS} -lah --color=always "$@" | bat
+}
+export lb
+
+logtail() {
+	tail -f "$@" | bat --paging=never -l log
+}
 
 fcd() {
 	NEWCWD=$(fd --type d --hidden --exclude .git --exclude node_modules --exclude .cache | fzf)
@@ -29,15 +40,6 @@ fcd() {
 	if [[ $? -eq 0 ]]; then
 		cd "${NEWCWD}" || exit
 	fi
-}
-
-lb() {
-	ls -lah --color=always $* | bat
-}
-export lb
-
-logtail() {
-	tail -f "$@" | bat --paging=never -l log
 }
 
 dnotify() {

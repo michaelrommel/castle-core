@@ -13,8 +13,9 @@ setopt hist_save_no_dups
 setopt extended_history
 
 # use up to search history for lines beginning with the same pattern
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
+autoload -Uz up-line-or-beginning-search
+autoload -Uz down-line-or-beginning-search
+autoload -Uz complist
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 [[ -n ${key[Up]} ]] && bindkey "${key[Up]}" up-line-or-beginning-search
@@ -24,6 +25,8 @@ bindkey -M viins ^K up-line-or-beginning-search
 bindkey -M viins ^J down-line-or-beginning-search
 bindkey -M vicmd ^K up-line-or-beginning-search
 bindkey -M vicmd ^J down-line-or-beginning-search
+bindkey -M viins ^U backward-word
+bindkey -M viins ^D forward-word
 
 # Change cursor shape for different vi modes.
 _fix_cursor() {
@@ -57,7 +60,7 @@ zstyle ':completion:*' list-dirs-first true
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ''
 # shellcheck disable=SC2296
-zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}" "ma=48;5;4;38;5;255" 
+zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}" "ma=48;5;4;38;5;255"
 # Don't complete unavailable commands.
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
 # General styling
@@ -96,4 +99,3 @@ source "${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # my personal initialization script 2nd part
 [[ -f "${HOME}/.postinitialization.sh" ]] && source "${HOME}/.postinitialization.sh"
-source "${HOME}/.minimalrc"
