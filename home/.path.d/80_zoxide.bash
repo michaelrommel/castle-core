@@ -1,6 +1,5 @@
-#! /usr/bin/env zsh
+#! /usr/bin/env bash
 
-RET=$(zoxide --version 2>/dev/null)
-if [[ "$?" -eq 0 ]]; then
+if zoxide --version >/dev/null 2>&1; then
 	eval "$(zoxide init bash)"
 fi
