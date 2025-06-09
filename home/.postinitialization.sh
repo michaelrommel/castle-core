@@ -17,6 +17,8 @@ alias grep='grep --colour=auto'
 
 if [[ "${OSNAME}" == "Darwin" ]]; then
 	LS='gls'
+else
+	LS='ls'
 fi
 if type l 2>/dev/null 1>&2; then
 	unalias 'l'
