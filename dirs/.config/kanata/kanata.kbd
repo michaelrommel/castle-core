@@ -3,8 +3,7 @@
     process-unmapped-keys yes
     concurrent-tap-hold yes
     ;; macos-dev-names-exclude (
-    ;;   "Device name 1"
-    ;;   "Device name 2"
+    ;;   "MX Master"
     ;; )
   )
 )
