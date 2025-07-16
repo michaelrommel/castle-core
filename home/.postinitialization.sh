@@ -17,13 +17,15 @@ alias grep='grep --colour=auto'
 
 if [[ "${OSNAME}" == "Darwin" ]]; then
 	LS='gls'
+else
+	LS='ls'
 fi
 if type l 2>/dev/null 1>&2; then
 	unalias 'l'
 fi
-alias l="${LS} -lah --color --hyperlink=auto"
-alias ll="${LS} -lah --color --hyperlink=auto"
-alias lr="${LS} -lahtr --color --hyperlink=auto"
+alias l="${LS} -lah --color --hyperlink=never"
+alias ll="${LS} -lah --color --hyperlink=never"
+alias lr="${LS} -lahtr --color --hyperlink=never"
 
 lb() {
 	${LS} -lah --color=always "$@" | bat
