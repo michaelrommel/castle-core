@@ -3,8 +3,7 @@
     process-unmapped-keys yes
     concurrent-tap-hold yes
     ;; macos-dev-names-exclude (
-    ;;   "Device name 1"
-    ;;   "Device name 2"
+    ;;   "MX Master"
     ;; )
   )
 )
@@ -25,7 +24,7 @@
 (defvar
   tap-time 100
   cursor-tap-time 300
-  hold-time 200
+  hold-time 250
 )
 
 (defvirtualkeys
@@ -37,7 +36,7 @@
 	escctl (tap-hold-release $tap-time $hold-time esc lctl)
 	tabsft (tap-hold-release $tap-time $hold-time tab lsft)
 	;; make the double tap repeat action shorter for keys where I seldomly use repeats, only hjkl
-	a (tap-hold-press $tap-time $hold-time a lsft)
+	a (tap-hold-release $tap-time $hold-time a lsft)
 	s (tap-hold-release $tap-time $hold-time s lmet)
 	d (tap-hold-release $tap-time $hold-time d lalt)
 	f (tap-hold-release $tap-time $hold-time f lctl)
