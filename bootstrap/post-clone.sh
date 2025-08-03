@@ -26,7 +26,7 @@ get_arch() {
 
 echo "Installing basic packages"
 if is_mac; then
-	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick yazi carapace)
+	desired=(mosh keychain ncurses gawk autoconf automake pkg-config coreutils imagemagick yazi carapace starship)
 	missing=()
 	check_brewed "missing" "${desired[@]}"
 	if [[ "${#missing[@]}" -gt 0 ]]; then
@@ -44,14 +44,6 @@ else
 		sudo apt-get -y update
 		sudo apt-get -y install "${missing[@]}"
 	fi
-fi
-
-if [[ ! -d "${HOME}/.oh-my-posh" ]]; then
-	echo "Installing oh-my-posh for zsh"
-	mkdir -p "${HOME}/.cache"
-	mkdir -p "${HOME}/.oh-my-posh"
-	export PATH="${HOME}/.oh-my-posh:${PATH}"
-	curl -s https://ohmyposh.dev/install.sh | bash -s -- -d "${HOME}/.oh-my-posh"
 fi
 
 if [[ ! -d "${HOME}/.zsh/zsh-autosuggestions" ]]; then
@@ -82,6 +74,10 @@ if ! is_mac; then
 		rm -rf "${TMPDIR}"
 		echo "done."
 	fi
+	# shell prompt
+	if [[ ! -f "${HOME}/.cargo/bin/starship" ]]; then
+		"${HOME}/.homesick/repos/castle-core/home/bin/update_starship.sh"
+	fi
 	# smarter "cd"
 	if [[ ! -f "${HOME}/bin/zoxide" ]]; then
 		echo "Installing zoxide..."
@@ -101,7 +97,7 @@ if ! is_mac; then
 		rm -rf "${TMPDIR}"
 		echo "done."
 	fi
-	# smarter "cd"
+	# better autocompletion in the shell
 	if [[ ! -f "${HOME}/bin/carapace" ]]; then
 		echo "Installing carapace..."
 		arch="$(get_arch)"
