@@ -133,12 +133,23 @@ format = '[[ $symbol $branch](fg:dark0 bg:light3)]($style)'
 [git_status]
 style = "bg:light3"
 format = '[[($all_status$ahead_behind )](fg:dark0_hard bg:light3)]($style)[](fg:light3 bg:dark0_hard)'
+conflicted = ' =$count'
+ahead = ' ⇡$ahead_count'
+behind = ' ⇣$behind_count'
+diverged = ' ⇕'
+up_to_date = ''
 untracked = ' ?$count'
 stashed = ' \$$count'
 modified = ' !$count'
 staged = ' +$count'
 renamed = ' »$count'
 deleted = ' ✘$count'
+
+[git_state]
+style = "fg:dark0_hard bg:light4"
+format = '[ $state( $progress_current/$progress_total) ]($style)[](fg:light4 bg:dark0_hard)'
+#'[[ $symbol $branch](fg:dark0 bg:light3)]($style)'
+#format = '[[($all_status$ahead_behind )](fg:dark0_hard bg:light3)]($style)[](fg:light3 bg:dark0_hard)'
 
 [nodejs]
 symbol = " "
