@@ -85,12 +85,14 @@ if [[ $RC == 1 || $RC == 2 ]]; then
 		# suppress error messages, when a glob pattern returns no matches
 		setopt +o nomatch
 	fi
+	[[ ${DEBUG} == false ]] && FLAG="--quiet"
 	if [[ "${OSNAME}" == "Darwin" ]]; then
 		# on macOS: keychain has support to get the passphrase from the OS Keyring
 		# before you can use the keychain, you must add it once to it
 		# ssh-add --apple-use-keychain ~/.ssh/id_ecdsa
+		# shellcheck disable=SC2086,SC2068
+		eval "$(keychain ${FLAG} --eval --ssh-allow-forwarded)"
 		ssh-add -q --apple-load-keychain ~/.ssh/id_ecdsa
-		eval "$(keychain --eval --agents ssh --inherit any-once id_ecdsa)"
 	elif [[ "${OSNAME}" == "Linux" ]]; then
 		if [[ "${OSRELEASE}" =~ "-microsoft-" ]]; then
 			# we are on WSL2
@@ -111,10 +113,9 @@ if [[ $RC == 1 || $RC == 2 ]]; then
 			declare -a IDENTITIES=(id_ed25519 id_ecdsa id_rsa)
 		fi
 		# inherit identities or start new ssh-agent
-		[[ ${DEBUG} == false ]] && FLAG="--quiet"
 		# shellcheck disable=SC2086,SC2068
-		eval "$(keychain ${FLAG} --eval --ignore-missing \
-			--agents ssh --inherit any-once ${IDENTITIES[@]})"
+		eval "$(keychain ${FLAG} --eval --ssh-allow-forwarded --ignore-missing \
+			${IDENTITIES[@]})"
 	else
 		echo "Unknown Operating System: ${OSNAME}"
 	fi

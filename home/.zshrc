@@ -90,12 +90,13 @@ export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243"
 bindkey '^ ' autosuggest-accept
-# shellcheck disable=SC1094
+# shellcheck disable=SC1091
 source "${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # prompt customization
 # shellcheck disable=SC2086
-[[ -f "${HOME}/.oh-my-posh/posh.json" ]] && eval "$(oh-my-posh init zsh --config ${HOME}/.oh-my-posh/posh.json)"
+#[[ -f "${HOME}/.oh-my-posh/posh.json" ]] && eval "$(oh-my-posh init zsh --config ${HOME}/.oh-my-posh/posh.json)"
+[[ -x "${HOME}/.cargo/bin/starship" ]] && eval "$(starship init zsh)"
 
 # my personal initialization script 2nd part
 [[ -f "${HOME}/.postinitialization.sh" ]] && source "${HOME}/.postinitialization.sh"
