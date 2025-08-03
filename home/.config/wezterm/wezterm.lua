@@ -1,4 +1,6 @@
 local wezterm = require 'wezterm'
+local act = wezterm.action
+
 local config = {}
 
 local fontname = 'VictorMono NF'
@@ -14,15 +16,17 @@ if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
 	}
 	-- config.default_cwd = "C:/cygwin64/bin"
 	-- config.default_prog = { "cmd.exe", "/c", "c:/cygwin64/bin/bash.exe --login -i" }
-	config.default_domain = 'WSL:bookworm'
 	-- config.default_domain = 'WSL:neoplain'
 	-- config.default_domain = 'SSH:WSL'
+	config.default_domain = 'WSL:bookworm'
 	config.ssh_backend = "Ssh2"
 	fontname = 'VictorMono NF'
 	fontsize = 13
 	config.initial_rows = 40
 	config.initial_cols = 120
-	-- config.allow_win32_input_mode = false
+	-- this conflicts with the csi u mode that we need for
+	-- tmux and extended key reporting
+	config.allow_win32_input_mode = false
 else
 	config.term = "wezterm"
 	config.initial_rows = 45
@@ -102,9 +106,15 @@ config.colors = {
 }
 
 -- config.debug_key_events = true
--- config.disable_default_key_bindings = true
+-- we define only the most needed commmands below in the key section
+-- this leaves us with more combinations for the editor/debugger
+config.disable_default_key_bindings = true
+-- we need to enable this to gain access to combinations like
+-- CTRL-SHIFT-I and so on. On Windows we need to disable the
+-- windows input mode above
 config.enable_csi_u_key_encoding = true
 -- config.enable_kitty_keyboard = true
+
 config.treat_east_asian_ambiguous_width_as_wide = false
 config.unicode_version = 9
 -- config.normalize_output_to_unicode_nfc = true
@@ -159,6 +169,25 @@ config.color_schemes = {
 			"#fbf1c7"
 		}
 	},
+}
+
+config.keys = {
+	{ key = 'Tab', mods = 'CTRL',       action = act.ActivateTabRelative(1) },
+	{ key = 'Tab', mods = 'SHIFT|CTRL', action = act.ActivateTabRelative(-1) },
+	{ key = '-',   mods = 'CTRL',       action = act.DecreaseFontSize },
+	{ key = '0',   mods = 'CTRL',       action = act.ResetFontSize },
+	{ key = '=',   mods = 'CTRL',       action = act.IncreaseFontSize },
+	{ key = 'C',   mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
+	{ key = 'L',   mods = 'SHIFT|CTRL', action = act.ShowDebugOverlay },
+	{ key = 'N',   mods = 'SHIFT|CTRL', action = act.SpawnWindow },
+	{ key = 'P',   mods = 'SHIFT|CTRL', action = act.ActivateCommandPalette },
+	{ key = 'T',   mods = 'SHIFT|CTRL', action = act.SpawnTab 'CurrentPaneDomain' },
+	{ key = 'V',   mods = 'SHIFT|CTRL', action = act.PasteFrom 'Clipboard' },
+	{ key = 'c',   mods = 'SHIFT|CTRL', action = act.CopyTo 'Clipboard' },
+	{ key = 'l',   mods = 'SHIFT|CTRL', action = act.ShowDebugOverlay },
+	{ key = 'n',   mods = 'SHIFT|CTRL', action = act.SpawnWindow },
+	{ key = 't',   mods = 'SHIFT|CTRL', action = act.SpawnTab 'CurrentPaneDomain' },
+	{ key = 'v',   mods = 'SHIFT|CTRL', action = act.PasteFrom 'Clipboard' },
 }
 
 return config
