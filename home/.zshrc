@@ -27,6 +27,11 @@ bindkey -M vicmd ^K up-line-or-beginning-search
 bindkey -M vicmd ^J down-line-or-beginning-search
 bindkey -M viins ^U backward-word
 bindkey -M viins ^D forward-word
+zmodload zsh/complist
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
 
 # Change cursor shape for different vi modes.
 _fix_cursor() {
@@ -51,6 +56,8 @@ zle -N zle-keymap-select
 # zle -N zle-line-init
 precmd_functions+=(_fix_cursor)
 
+zstyle ':completion:*' completer _extensions _expand_alias _complete _approximate
+
 # case insensitive completion - was the only thing I used from oh-my-zsh
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
@@ -59,15 +66,16 @@ zstyle ':completion:*' special-dirs true
 zstyle ':completion:*' list-dirs-first true
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' group-name ''
 # shellcheck disable=SC2296
 zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}" "ma=48;5;4;38;5;255"
 # Don't complete unavailable commands.
 zstyle ':completion:*:functions' ignored-patterns '(_*|pre(cmd|exec))'
-# General styling
-zstyle ':completion:*:corrections'   format '%F{green}  %d (errors: %e)  %f'
-zstyle ':completion:*:descriptions'  format '%F{blue}  %d  %f'
-zstyle ':completion:*:messages'      format '%B%F{magenta}  %U%d%u  %f%b'
-zstyle ':completion:*:warnings'      format '%B%F{red} %Uno matches found%u %f%b'
+# General styling, note that this is using tag names
+zstyle ':completion:*:descriptions'  format '%F{#a89984}-- %d --%f'
+zstyle ':completion:*:corrections'   format '%F{#b8bb26}-- %d (errors: %e) --%f'
+zstyle ':completion:*:messages'      format '%B%F{#d3869b}-- %d --%f%b'
+zstyle ':completion:*:warnings'      format '%B%F{#cc241d} no matches found %f%b'
 
 # Kill
 # shellcheck disable=SC2016
@@ -76,6 +84,8 @@ zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-
 zstyle ':completion:*:*:kill:*' menu yes select
 zstyle ':completion:*:*:kill:*' force-list always
 zstyle ':completion:*:*:kill:*' insert-ids menu
+# Git
+zstyle ':completion:*:*:git:*' group-order 'main commands' 'alias commands' 'external commands'
 
 # automatically load bash completion functions
 autoload -U +X bashcompinit && bashcompinit
@@ -90,7 +100,7 @@ export ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 export ZSH_AUTOSUGGEST_MANUAL_REBIND=true
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243"
 bindkey '^ ' autosuggest-accept
-# shellcheck disable=SC1091
+# shellcheck disable=SC1094
 source "${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # prompt customization
