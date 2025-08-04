@@ -96,7 +96,7 @@ source "${HOME}/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh"
 # prompt customization
 # shellcheck disable=SC2086
 #[[ -f "${HOME}/.oh-my-posh/posh.json" ]] && eval "$(oh-my-posh init zsh --config ${HOME}/.oh-my-posh/posh.json)"
-[[ -x "${HOME}/.cargo/bin/starship" ]] && eval "$(starship init zsh)"
+[[ -x "${HOME}/.cargo/bin/starship" || -x "/opt/homebrew/bin/starship" ]] && eval "$(starship init zsh)"
 
 # my personal initialization script 2nd part
 [[ -f "${HOME}/.postinitialization.sh" ]] && source "${HOME}/.postinitialization.sh"
