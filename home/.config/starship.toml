@@ -16,8 +16,6 @@ $status\
 $character\
 [ ](fg:dark1)"""
 
-# 
-
 right_format = """
 $c\
 $cpp\
@@ -156,8 +154,6 @@ deleted = ' ✘$count'
 [git_state]
 style = "fg:dark0_hard bg:light4"
 format = '[ $state( $progress_current/$progress_total) ]($style)[](fg:light4 bg:dark0_hard)'
-#'[[ $symbol $branch](fg:dark0 bg:light3)]($style)'
-#format = '[[($all_status$ahead_behind )](fg:dark0_hard bg:light3)]($style)[](fg:light3 bg:dark0_hard)'
 
 [c]
 symbol = " "
@@ -211,13 +207,13 @@ disabled = true
 
 [status]
 disabled = false
-format = '[](fg:dark0_hard bg:dark1)[ $symbol$common_meaning$signal_name$maybe_int ]($style)'
+format = '[](fg:dark0_hard bg:dark1)[ ($common_meaning$signal_name$maybe_int )$symbol]($style)'
 symbol = ' '
 success_symbol = ' '
 not_executable_symbol = ' '
 not_found_symbol = '󰍉 '
-sigint_symbol = ' '
-signal_symbol = '󰈿 '
+sigint_symbol = ''
+signal_symbol = '󰈿'
 success_style = 'bold bg:dark1 fg:neutral_green'
 failure_style = 'bold bg:dark1 fg:neutral_red'
 map_symbol = true
@@ -227,7 +223,7 @@ disabled = false
 format = '[$symbol](bg:dark1)'
 success_symbol = ''
 error_symbol = ''
-vimcmd_symbol = '[NORM ](bold bg:dark1 fg:neutral_blue)'
+vimcmd_symbol = '[NORM](bold bg:dark1 fg:neutral_blue)'
 vimcmd_replace_one_symbol = '[RONE ](bold bg:dark1 fg:neutral_purple)'
 vimcmd_replace_symbol = '[REP ](bold bg:dark1 fg:neutral_purple)'
 vimcmd_visual_symbol = '[VIS ](bold bg:dark1 fg:neutral_yellow)'
