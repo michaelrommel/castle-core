@@ -111,7 +111,7 @@ truncate_to_repo = false
 use_logical_path = false
 style = 'bg:dark1 fg:light3'
 repo_root_style = 'bold bg:dark1 fg:light1'
-format = '[󰉖 $path]($style)'
+format = '[$path]($style)'
 repo_root_format = '[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)'
 truncation_length = 3
 truncation_symbol = "…/"
@@ -124,6 +124,7 @@ truncation_symbol = "…/"
 "Pictures" = " "
 "Developer" = "󰲋 "
 "Software" = "󰘦 "
+"~" = " "
 
 [sudo]
 disabled = false
