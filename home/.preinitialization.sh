@@ -86,12 +86,18 @@ if [[ $RC == 1 || $RC == 2 ]]; then
 		setopt +o nomatch
 	fi
 	[[ ${DEBUG} == false ]] && FLAG="--quiet"
+	KVER=$(keychain --nocolor --version 2>&1 | grep -E "\* keychain" | sed -E 's/.* ([0-9]+)\..*/\1/')
+	if [[ ${KVER} -gt 2 ]]; then
+		FLAG="${FLAG} --ssh-allow-forwarded"
+	else
+		FLAG="${FLAG}"
+	fi
 	if [[ "${OSNAME}" == "Darwin" ]]; then
 		# on macOS: keychain has support to get the passphrase from the OS Keyring
 		# before you can use the keychain, you must add it once to it
 		# ssh-add --apple-use-keychain ~/.ssh/id_ecdsa
 		# shellcheck disable=SC2086,SC2068
-		eval "$(keychain ${FLAG} --eval --ssh-allow-forwarded)"
+		eval "$(keychain ${FLAG} --eval)"
 		ssh-add -q --apple-load-keychain ~/.ssh/id_ecdsa
 	elif [[ "${OSNAME}" == "Linux" ]]; then
 		if [[ "${OSRELEASE}" =~ "-microsoft-" ]]; then
@@ -114,7 +120,7 @@ if [[ $RC == 1 || $RC == 2 ]]; then
 		fi
 		# inherit identities or start new ssh-agent
 		# shellcheck disable=SC2086,SC2068
-		eval "$(keychain ${FLAG} --eval --ssh-allow-forwarded --ignore-missing \
+		eval "$(keychain ${FLAG} --eval --ignore-missing \
 			${IDENTITIES[@]})"
 	else
 		echo "Unknown Operating System: ${OSNAME}"
