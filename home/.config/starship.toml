@@ -150,7 +150,7 @@ stashed = ' \$$count'
 modified = ' !$count'
 staged = ' +$count'
 renamed = ' »$count'
-deleted = ' ✘$count'
+deleted = ' x$count'
 
 [git_state]
 style = "fg:dark0_hard bg:light4"
